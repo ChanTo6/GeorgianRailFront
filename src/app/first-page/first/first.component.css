@@ -1,0 +1,791 @@
+/* Login Prompt Modal Styles */
+.login-prompt-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login-prompt-title {
+  font-size: 1.5em;
+  color: #0a2540;
+  margin-bottom: 0.5em;
+}
+.login-prompt-desc {
+  color: #444;
+  font-size: 1.1em;
+  margin-bottom: 1.5em;
+}
+.login-prompt-btn {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  min-width: unset;
+  width: fit-content;
+  max-width: 180px;
+  padding: 0.35em 0.7em;
+  font-size: 0.97em;
+  border-radius: 7px;
+  box-sizing: border-box;
+}
+.login-prompt-icon {
+  font-size: 1.3em;
+  margin-right: 8px;
+  color: #0a2540;
+}
+.login-prompt-btn-text {
+  font-weight: 600;
+  font-size: 1.08em;
+  color: #0a2540;
+}
+/* Move Go to Login button a bit to the right in the login prompt modal */
+.ticket-modal-backdrop .ticket-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ticket-modal-backdrop .ticket-modal .menu-btn-elegant {
+  margin-left: 80px;
+  align-self: center;
+
+}
+/* Wider Login Prompt Modal */
+.ticket-modal-backdrop .ticket-modal {
+  min-width: 850px;
+  max-width: 95vw;
+  width: 420px;
+}
+/* Consolidated .ticket-icon and .elegant-ticket-table classes below */
+.ticket-icon {
+  margin-right: 6px;
+  font-size: 1.08em;
+  vertical-align: middle;
+  opacity: 0.82;
+}
+.elegant-ticket-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0 0 0;
+  font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+  background: #fafdff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(33, 150, 243, 0.10);
+}
+.elegant-ticket-table th, .elegant-ticket-table td {
+  padding: 12px 18px;
+  text-align: left;
+}
+.elegant-ticket-table th {
+  background: linear-gradient(90deg, #1976d2 0%, #42a5f5 100%);
+  color: #fff;
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border-bottom: 2px solid #e3eafc;
+}
+.elegant-ticket-table td {
+  font-size: 1.04rem;
+  color: #374151;
+  border-bottom: 1px solid #e3eafc;
+}
+.elegant-ticket-table tr:last-child td {
+  border-bottom: none;
+}
+.elegant-ticket-table tbody tr:hover {
+  background: #e3eafc33;
+  transition: background 0.18s;
+}
+/* --- Elegant Admin Buttons --- */
+/* Elegant admin button, pulled further left */
+/* Pull admin buttons further left, even if parent has padding */
+/* Pull admin buttons even further left */
+/* Pulled extremely left for user request */
+/* Pulled extremely left, now with smaller width */
+/* Pulled left, but less extreme */
+/* Pulled left, restored original width */
+/* Pulled left, original width, more left offset */
+/* Pulled left, 3x more than before */
+.elegant-admin-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.6em;
+  font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+  font-size: 1.13rem;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 12px 48px;
+  min-width: 220px;
+  background: linear-gradient(90deg, #1976d2 0%, #42a5f5 100%);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(33, 150, 243, 0.13);
+  border: none;
+  margin: 8px 0 0 0;
+  transition: background 0.18s, box-shadow 0.18s, transform 0.12s;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  align-self: flex-start;
+  margin-left: -240px;
+  position: relative;
+  left: -72px;
+}
+
+/* Remove left padding from parent for these buttons if needed */
+.vertical-stripe-outer .elegant-admin-btn {
+  padding-left: 24px !important;
+}
+.elegant-admin-btn .menu-icon {
+  font-size: 1.3em;
+  margin-right: 0.3em;
+}
+.elegant-admin-btn:hover, .elegant-admin-btn:focus {
+  background: linear-gradient(90deg, #1565c0 0%, #1e88e5 100%);
+  box-shadow: 0 8px 24px rgba(33, 150, 243, 0.18);
+  transform: translateY(-2px) scale(1.03);
+}
+/* --- Elegant Not Logged In Modal Block --- */
+.elegant-modal-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px 24px 24px;
+  background: #fafdff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(33, 150, 243, 0.10), 0 1.5px 4px rgba(33, 150, 243, 0.06);
+  min-width: 320px;
+  max-width: 420px;
+  margin: 0 auto;
+}
+.elegant-modal-block .modal-header-icon {
+  margin-bottom: 12px;
+}
+.not-logged-in-title {
+  font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #1976d2;
+  margin: 0.5em 0 0.7em 0;
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+.not-logged-in-desc {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 1.08rem;
+  color: #374151;
+  margin-bottom: 1.2em;
+  text-align: center;
+}
+.not-logged-in-btn {
+  width: 100%;
+  font-size: 1.13rem;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 14px 0;
+  background: linear-gradient(90deg, #1976d2 0%, #42a5f5 100%);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(33, 150, 243, 0.13);
+  border: none;
+  transition: background 0.18s, box-shadow 0.18s, transform 0.12s;
+  margin-top: 8px;
+}
+.not-logged-in-btn:hover, .not-logged-in-btn:focus {
+  background: linear-gradient(90deg, #1565c0 0%, #1e88e5 100%);
+  box-shadow: 0 8px 24px rgba(33, 150, 243, 0.18);
+  transform: translateY(-2px) scale(1.03);
+}
+/* --- Add Train Modal --- */
+.add-train-modal {
+  max-width: 480px;
+  min-width: 340px;
+  padding: 36px 32px 28px 32px;
+  background: #fafdff;
+  border-radius: 20px;
+  box-shadow: 0 10px 36px rgba(33, 150, 243, 0.13), 0 1.5px 4px rgba(33, 150, 243, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.add-train-title {
+  font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #1976d2;
+  margin: 0.5em 0 1.2em 0;
+  letter-spacing: 0.03em;
+}
+.add-train-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.form-row {
+  display: flex;
+  gap: 14px;
+  width: 100%;
+}
+.add-train-form .elegant-input {
+  flex: 1 1 0;
+  font-size: 1.09rem;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1.5px solid #e3eafc;
+  background: #fff;
+  font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+  margin-bottom: 0;
+  box-shadow: 0 1.5px 4px rgba(33, 150, 243, 0.04);
+  transition: border 0.18s, box-shadow 0.18s;
+}
+.add-train-form .elegant-input:focus {
+  border: 1.5px solid #1976d2;
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.13);
+  outline: none;
+}
+.add-train-btn {
+  margin-top: 10px;
+  width: 100%;
+  font-size: 1.13rem;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 14px 0;
+  background: linear-gradient(90deg, #1976d2 0%, #42a5f5 100%);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(33, 150, 243, 0.13);
+  border: none;
+  transition: background 0.18s, box-shadow 0.18s, transform 0.12s;
+}
+.add-train-btn:hover, .add-train-btn:focus {
+  background: linear-gradient(90deg, #1565c0 0%, #1e88e5 100%);
+  box-shadow: 0 8px 24px rgba(33, 150, 243, 0.18);
+  transform: translateY(-2px) scale(1.03);
+}
+/* --- Elegant Ticket Table Styles --- */
+.ticket-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 8px;
+  font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(40, 62, 81, 0.13), 0 1.5px 4px rgba(33, 150, 243, 0.08);
+  font-size: 1.09rem;
+  letter-spacing: 0.01em;
+}
+.ticket-table th, .ticket-table td {
+  padding: 15px 22px;
+  text-align: left;
+  border-bottom: 1.5px solid #e5e7eb;
+  transition: background 0.2s;
+}
+.ticket-table th {
+  background: linear-gradient(90deg, #f8fafc 60%, #e3eafc 100%);
+  font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+  font-weight: 800;
+  color: #283e51;
+  text-transform: uppercase;
+  font-size: 1.08em;
+  letter-spacing: 0.04em;
+  border-bottom: 2.5px solid #bdbdbd;
+}
+.ticket-table tr:last-child td {
+  border-bottom: none;
+}
+.ticket-table tr {
+  background: #fff;
+}
+.ticket-table tr:hover {
+  background: #f0f4ff;
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.07);
+}
+.ticket-table td {
+  color: #374151;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-weight: 600;
+}
+.ticket-table th:first-child, .ticket-table td:first-child {
+  border-top-left-radius: 16px;
+}
+.ticket-table th:last-child, .ticket-table td:last-child {
+  border-top-right-radius: 16px;
+}
+/* --- View Tickets Button --- */
+button.view-tickets-btn {
+  font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+  font-size: 1.18rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: linear-gradient(90deg, #283e51 0%, #485563 100%);
+  border: none;
+  border-radius: 32px;
+  padding: 14px 44px 14px 38px;
+  box-shadow: 0 6px 24px rgba(40, 62, 81, 0.18), 0 1.5px 4px rgba(33, 150, 243, 0.08);
+  transition: background 0.18s, box-shadow 0.18s, transform 0.12s;
+  cursor: pointer;
+  margin-bottom: 22px;
+  outline: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+  width: 200px;
+  height: 72px;
+}
+button.view-tickets-btn::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(33,150,243,0.13) 0%, rgba(255,255,255,0.08) 100%);
+  opacity: 0.7;
+  pointer-events: none;
+  border-radius: 32px;
+}
+button.view-tickets-btn:hover, button.view-tickets-btn:focus {
+  background: linear-gradient(90deg, #1e2a38 0%, #1976d2 100%);
+  box-shadow: 0 10px 32px rgba(33, 150, 243, 0.22);
+  transform: translateY(-2px) scale(1.04);
+}
+button.view-tickets-btn .icon-ticket {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  margin-right: 2px;
+  vertical-align: middle;
+}
+.ticket-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 8px;
+  font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10), 0 1.5px 4px rgba(0,0,0,0.04);
+  font-size: 1.08rem;
+  letter-spacing: 0.01em;
+}
+.ticket-table th, .ticket-table td {
+  padding: 14px 18px;
+  text-align: left;
+  border-bottom: 1.5px solid #e5e7eb;
+  transition: background 0.2s;
+}
+.ticket-table th {
+  background: linear-gradient(90deg, #f8fafc 60%, #e8eaf6 100%);
+  font-weight: 700;
+  color: #2d3748;
+  text-transform: uppercase;
+  font-size: 1.05em;
+  letter-spacing: 0.04em;
+  border-bottom: 2.5px solid #bdbdbd;
+}
+.ticket-table tr:last-child td {
+  border-bottom: none;
+}
+.ticket-table tr {
+  background: #fff;
+}
+.ticket-table tr:hover {
+  background: #f0f4ff;
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.07);
+}
+.ticket-table td {
+  color: #374151;
+  font-weight: 500;
+}
+.ticket-table th:first-child, .ticket-table td:first-child {
+  border-top-left-radius: 14px;
+}
+.ticket-table th:last-child, .ticket-table td:last-child {
+  border-top-right-radius: 14px;
+}
+/* --- Ticket Modal Centered Popup Styles --- */
+.ticket-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.ticket-modal {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  padding: 32px 28px 24px 28px;
+  min-width: 340px;
+  max-width: 90vw;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ticket-modal-wide {
+  min-width: 720px;
+  max-width: 98vw;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+
+.close-modal-btn {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.close-modal-btn:hover {
+  color: #222;
+}
+
+.ticket-modal h2 {
+  margin-bottom: 18px;
+  font-family: 'Montserrat', 'Roboto', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #222;
+}
+
+/* --- Ticket Table Styles --- */
+.ticket-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 8px;
+  font-family: 'Roboto', Arial, sans-serif;
+  background: #fafbfc;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.ticket-table th, .ticket-table td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+.ticket-table th {
+  background: #f3f4f6;
+  font-weight: 600;
+  color: #333;
+}
+.ticket-table tr:last-child td {
+  border-bottom: none;
+}
+.ticket-table tr:hover {
+  background: #f5f7fa;
+}
+/* =========================
+   Hamburger Menu Dropdown (Elegant)
+========================= */
+.menu-dropdown-elegant {
+  position: absolute;
+  top: 66px;
+  right: 0px;
+  min-width: 240px;
+  max-width: 320px;
+  background: linear-gradient(120deg, #232526 0%, #414345 100%);
+  border-radius: 1.2rem;
+  box-shadow: 0 10px 36px rgba(40,62,81,0.22), 0 1.5px 0 #2228;
+  padding: 1.3rem 0.7rem 1.3rem 0.7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1.1rem;
+  transform: translateY(-32px) scaleY(0.7);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.32s cubic-bezier(0.4,0,0.2,1), opacity 0.22s cubic-bezier(0.4,0,0.2,1);
+  border-top-right-radius: 0.8rem;
+  border-top-left-radius: 0.8rem;
+  z-index: 1100;
+  font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+}
+.menu-dropdown-elegant.open {
+  transform: translateY(0) scaleY(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+.menu-btn-elegant {
+  background: linear-gradient(90deg, #283e51 0%, #485563 100%);
+  color: #fff;
+  border: none;
+  border-radius: 0.7rem;
+  padding: 1.1rem 1.7rem 1.1rem 1.3rem;
+  font-size: 1.13rem;
+  font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, transform 0.18s, box-shadow 0.18s;
+  width: 94%;
+  margin: 0 auto;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.10);
+}
+.menu-btn-elegant:hover, .menu-btn-elegant:focus {
+  background: linear-gradient(90deg, #1565c0 0%, #1e88e5 100%);
+  color: #fff;
+  transform: translateX(2px) scale(1.04);
+  box-shadow: 0 6px 24px rgba(33, 150, 243, 0.18);
+}
+.menu-icon {
+  font-size: 1.35em;
+  opacity: 0.92;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.menu-user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 1.08rem;
+  font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+  color: #e3eafc;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  padding-left: 0.3rem;
+}
+/* --- Slider Black Box --- */
+.slider-black-box {
+  position: absolute;
+  right: 180px;
+  bottom: 48px;
+  background: linear-gradient(120deg, rgba(40,62,81,0.92) 60%, rgba(33,150,243,0.18) 100%);
+  border-radius: 22px;
+  box-shadow: 0 8px 32px rgba(40,62,81,0.18), 0 1.5px 4px rgba(33,150,243,0.08);
+  padding: 32px 38px 24px 38px;
+  min-width: 340px;
+  max-width: 96vw;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+  z-index: 20;
+}
+.slider-row.slider-btn-row {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 18px;
+}
+.slider-btn {
+  font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+  font-size: 1.13rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(90deg, #1976d2 60%, #42a5f5 100%);
+  border: none;
+  border-radius: 18px;
+  padding: 10px 28px;
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.13);
+  transition: background 0.18s, box-shadow 0.18s, transform 0.12s;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.slider-btn:hover, .slider-btn:focus {
+  background: linear-gradient(90deg, #1565c0 60%, #1e88e5 100%);
+  box-shadow: 0 6px 24px rgba(33, 150, 243, 0.18);
+  transform: translateY(-2px) scale(1.03);
+}
+.slider-btn-label {
+  font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+  font-size: 1.13rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+.slider-btn-label-big {
+  font-size: 1.18rem;
+}
+.slider-btn-icon {
+  font-size: 1.35em;
+  margin: 0 2px;
+  color: #fff;
+  opacity: 0.92;
+}
+.slider-row.slider-label-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
+  gap: 32px;
+}
+.slider-label {
+  font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: #e3eafc;
+  background: rgba(33, 150, 243, 0.13);
+  border-radius: 12px;
+  padding: 7px 18px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  box-shadow: 0 1.5px 4px rgba(33, 150, 243, 0.08);
+}
+.slider-label-icon {
+  font-size: 1.25em;
+  color: #90caf9;
+  margin-right: 4px;
+}
+/* --- End Slider Black Box --- */
+
+.first-page-bg {
+  background: rgba(0,0,0,0.92);
+  background-image: inherit;
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: background-image 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.first-page-overlay {
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.first-page-content {
+  background: rgba(0,0,0,0.25);
+  padding: 40px 32px;
+  border-radius: 18px;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  z-index: 2;
+}
+/* --- Vertical White Stripe and Sidebar Controls --- */
+.vertical-stripe-container {
+  position: absolute;
+  top: 38px; /* moved down from the very top for visual separation */
+  right: 60px;
+  width: 110px;
+  min-height: 1400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 16px;
+  margin: 0;
+  z-index: 2;
+}
+.hamburger-menu {
+  margin-top: 28px;
+  margin-bottom: 32px;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 101;
+}
+.hamburger-menu span {
+  display: block;
+  width: 32px;
+  height: 4px;
+  background: #fff;
+  margin: 4px 0;
+  border-radius: 2px;
+  transition: background 0.2s;
+}
+.vertical-stripe-outer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 auto;
+}
+.vertical-stripe {
+  width: 3px; /* even thinner stripe */
+  background: #fff;
+  border-radius: 3px;
+  min-height: 30px;
+  flex-shrink: 0;
+}
+.vertical-stripe-top {
+  height: 90px;
+  margin-bottom: 0;
+}
+.vertical-stripe-between {
+  height: 64px; /* doubled from 32px to 64px */
+  margin-bottom: 0;
+}
+.vertical-stripe-bottom {
+  /* flex: 1 1 auto; */
+  min-height: 572px;
+}
+.stripe-gap {
+  width: 100%;
+  background: transparent;
+  flex-shrink: 0;
+}
+.stripe-gap-btn {
+  height: 36px;
+}
+.stripe-gap-between {
+  height: 38px;
+}
+.stripe-gap-after {
+  height: 36px;
+}
+.stripe-label-text {
+  width: 160px;
+  min-height: 54px;
+  margin: 0 0 0 0;
+  border-radius: 14px;
+  background: transparent;
+  color: #fff;
+  font-size: 1.18rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 32px;
+  text-align: center;
+  letter-spacing: 1.1px;
+  user-select: none;
+  box-shadow: none;
+}
+/* Removed empty ruleset for .stripe-label-text-1, .stripe-label-text-2 */
+/* --- End Vertical White Stripe --- */

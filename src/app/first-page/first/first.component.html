@@ -1,0 +1,161 @@
+<div class="first-page-bg" [style.backgroundImage]="'url(' + backgroundImage + ')'">
+  <div class="first-page-overlay">
+
+    <!-- Slider Black Box -->
+    <div class="slider-black-box">
+      <div class="slider-row slider-btn-row">
+        <button class="slider-btn slider-btn-left" (click)="prevBackground()">
+          <span class="slider-btn-icon">&#8592;</span>
+          <span class="slider-btn-label slider-btn-label-big">წინა</span>
+        </button>
+        <button class="slider-btn slider-btn-right" (click)="nextBackground()" style="margin-right: 18px;">
+          <span class="slider-btn-label slider-btn-label-big">შემდეგი</span>
+          <span class="slider-btn-icon">&#8594;</span>
+        </button>
+      </div>
+      <div class="slider-row slider-label-row">
+        <span class="slider-label slider-label-prev">
+          <span class="slider-label-icon">&#10094;</span>
+          {{ prevName }}
+        </span>
+        <span class="slider-label slider-label-next">
+          {{ nextName }}
+          <span class="slider-label-icon">&#10095;</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- White Vertical Stripe and Sidebar Controls -->
+<div class="vertical-stripe-container">
+  <div class="hamburger-menu" (click)="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="vertical-stripe-outer">
+    <div class="vertical-stripe vertical-stripe-top"></div>
+    <div class="stripe-gap stripe-gap-btn"></div>
+    <button class="menu-btn-elegant elegant-admin-btn" (click)="openTicketsModal()">
+      <span class="menu-icon">&#128179;</span>
+      View Tickets
+    </button>
+    <!-- Login Prompt Modal -->
+    <div class="ticket-modal-backdrop" *ngIf="showLoginPromptModal" (click)="closeLoginPromptModal()">
+      <div class="ticket-modal login-prompt-modal elegant-modal-block" (click)="$event.stopPropagation()">
+        <button class="close-modal-btn" (click)="closeLoginPromptModal()">&times;</button>
+        <span class="modal-header-icon" style="font-size:2.5em; color:#1976d2; margin-bottom:8px; display: flex; align-items: center; justify-content: center; width: 100%;">🔒</span>
+        <h2 class="login-prompt-title not-logged-in-title">You are not logged in</h2>
+        <p class="login-prompt-desc not-logged-in-desc">Please log in to view your tickets.</p>
+        <button class="not-logged-in-btn login-prompt-btn" (click)="navigateTo('login')">
+          <span class="menu-icon login-prompt-icon">🔑</span>
+          <span class="login-prompt-btn-text">Go to Login</span>
+        </button>
+      </div>
+    </div>
+    <!-- Ticket Modal -->
+    <div class="ticket-modal-backdrop" *ngIf="ticketsModalOpen" (click)="closeTicketsModal()">
+      <div class="ticket-modal ticket-modal-wide" (click)="$event.stopPropagation()">
+        <button class="close-modal-btn" (click)="closeTicketsModal()">&times;</button>
+        <h2 *ngIf="isAdmin">All Sold Tickets</h2>
+        <h2 *ngIf="!isAdmin">My Tickets</h2>
+        <div *ngIf="tickets && tickets.length > 0; else noTickets">
+          <table class="elegant-ticket-table">
+            <thead>
+              <tr>
+                <th><span class="ticket-icon">🎫</span> Ticket ID</th>
+                <th><span class="ticket-icon">🚄</span> Train Name</th>
+                <th><span class="ticket-icon">#️⃣</span> Train ID</th>
+                <th><span class="ticket-icon">💺</span> Seat #</th>
+                <th><span class="ticket-icon">📧</span> Buyer Email</th>
+                <th><span class="ticket-icon">🆔</span> Buyer ID</th>
+                <th><span class="ticket-icon">🕒</span> Purchase Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ticket of tickets">
+                <td>{{ ticket.ticketId }}</td>
+                <td>{{ ticket.trainName }}</td>
+                <td>{{ ticket.trainId }}</td>
+                <td>{{ ticket.seatNumber }}</td>
+                <td>{{ ticket.buyerEmail }}</td>
+                <td>{{ ticket.buyerId }}</td>
+                <td>{{ ticket.purchaseDate | date:'short' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ng-template #noTickets>
+          <p>No tickets found.</p>
+        </ng-template>
+      </div>
+    </div>
+    <div class="stripe-gap stripe-gap-between"></div>
+    <div class="vertical-stripe vertical-stripe-between"></div>
+    <div class="stripe-gap stripe-gap-between"></div>
+    <button *ngIf="isAdmin" class="menu-btn-elegant elegant-admin-btn" (click)="showAddTrainForm = true">
+      <span class="menu-icon">&#9881;</span>
+      For Admin
+    </button>
+    <!-- Add Train Modal -->
+    <div class="ticket-modal-backdrop" *ngIf="showAddTrainForm" (click)="showAddTrainForm = false">
+      <div class="ticket-modal add-train-modal" (click)="$event.stopPropagation()">
+        <button class="close-modal-btn" (click)="showAddTrainForm = false">&times;</button>
+        <h2 class="add-train-title">Add New Train</h2>
+        <form (ngSubmit)="submitAddTrain()" #addTrainForm="ngForm" class="add-train-form">
+          <div class="form-row">
+            <input class="elegant-input" name="trainId" [(ngModel)]="addTrainData.trainId" type="number" placeholder="Train ID" required />
+            <input class="elegant-input" name="name" [(ngModel)]="addTrainData.name" type="text" placeholder="Train Name" required />
+          </div>
+          <div class="form-row">
+            <input class="elegant-input" name="source" [(ngModel)]="addTrainData.source" type="text" placeholder="Source" required />
+            <input class="elegant-input" name="destination" [(ngModel)]="addTrainData.destination" type="text" placeholder="Destination" required />
+          </div>
+          <div class="form-row">
+            <input class="elegant-input" name="date" [(ngModel)]="addTrainData.date" type="date" placeholder="Date" required />
+            <input class="elegant-input" name="time" [(ngModel)]="addTrainData.time" type="time" placeholder="Time" required />
+          </div>
+          <div class="form-row">
+            <input class="elegant-input" name="totalSeats" [(ngModel)]="addTrainData.totalSeats" type="number" placeholder="Total Seats" required />
+          </div>
+          <button class="add-train-btn" type="submit">Add Train</button>
+        </form>
+      </div>
+    </div>
+    <div class="stripe-gap stripe-gap-after"></div>
+    <div class="vertical-stripe vertical-stripe-bottom"></div>
+  </div>
+  <!-- Hamburger Menu Dropdown (top-right aligned, elegant) -->
+  <div class="menu-dropdown-backdrop" *ngIf="menuOpen" (click)="toggleMenu()">
+    <div class="menu-dropdown-elegant" [class.open]="menuOpen" (click)="$event.stopPropagation()">
+      <ng-container *ngIf="!userData; else loggedInMenu">
+        <button class="menu-btn-elegant" (click)="navigateTo('register')">
+          <span class="menu-icon">&#128100;</span>
+          Register
+        </button>
+        <button class="menu-btn-elegant" (click)="navigateTo('login')">
+          <span class="menu-icon">&#128274;</span>
+          Login
+        </button>
+        <button class="menu-btn-elegant" (click)="handleBookTicketClick()">
+          <span class="menu-icon">&#128649;</span>
+          Book a Ticket
+        </button>
+      </ng-container>
+      <ng-template #loggedInMenu>
+        <div class="menu-user-info">
+          <span class="menu-icon">&#128100;</span>
+          <span *ngIf="userData">{{ userData.email || userData.username || 'User' }}</span>
+        </div>
+        <button class="menu-btn-elegant" (click)="scrollToTrainSearch.emit()">
+          <span class="menu-icon">&#128179;</span>
+          My Booked Tickets
+        </button>
+        <button class="menu-btn-elegant" (click)="logout()">
+          <span class="menu-icon">&#128682;</span>
+          Logout
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</div>

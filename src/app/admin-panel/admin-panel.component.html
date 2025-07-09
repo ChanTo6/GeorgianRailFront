@@ -1,0 +1,22 @@
+<form (ngSubmit)="addTrain()">
+  <h2>Add Train (Admin)</h2>
+  <input type="number" [(ngModel)]="trainId" name="trainId" placeholder="Train ID" required />
+  <input type="text" [(ngModel)]="name" name="name" placeholder="Train Name" required />
+  <input type="text" [(ngModel)]="source" name="source" placeholder="Source" required />
+  <input type="text" [(ngModel)]="destination" name="destination" placeholder="Destination" required />
+  <input type="datetime-local" [(ngModel)]="date" name="date" placeholder="Date" required />
+  <input type="text" [(ngModel)]="time" name="time" placeholder="Time" required />
+  <input type="number" [(ngModel)]="totalSeats" name="totalSeats" placeholder="Total Seats" required />
+  <button type="submit">Add Train</button>
+  <div class="success" *ngIf="adminSuccess">{{ adminSuccess }}</div>
+  <div class="error" *ngIf="adminError">{{ adminError }}</div>
+</form>
+<button (click)="getSoldTickets()" style="margin: 1rem auto; display: block;">View Sold Tickets</button>
+<div class="tickets" *ngIf="soldTickets.length">
+  <h3>Sold Tickets</h3>
+  <ul>
+    <li *ngFor="let ticket of soldTickets">
+      <strong>User:</strong> {{ ticket.userId }}, <strong>Train:</strong> {{ ticket.trainId }}, <strong>Seat:</strong> {{ ticket.seatNumber }}
+    </li>
+  </ul>
+</div>

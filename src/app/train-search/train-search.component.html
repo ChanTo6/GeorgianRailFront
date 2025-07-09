@@ -1,0 +1,36 @@
+<div class="train-search-banner-bg">
+  <div class="train-search-card elegant-shadow">
+    <form (ngSubmit)="searchTrains()">
+      <div class="train-search-header elegant-gradient-text">
+        <span class="header-icon">🚄</span> <span>Search Trains</span>
+      </div>
+      <div class="train-search-fields">
+        <input type="text" [(ngModel)]="source" name="source" placeholder="Source Station" required class="elegant-input" />
+        <input type="text" [(ngModel)]="destination" name="destination" placeholder="Destination Station" required class="elegant-input" />
+        <button type="submit" class="elegant-btn">Search</button>
+      </div>
+      <div class="error elegant-error" *ngIf="error">{{ error }}</div>
+    </form>
+    <div class="results elegant-results" *ngIf="trains.length">
+      <div class="results-header elegant-gradient-text">Available Trains</div>
+      <ul>
+        <li *ngFor="let train of trains">
+          <div class="train-list-item elegant-list-item">
+            <div class="train-list-title elegant-list-title">{{ train.name }}</div>
+            <div class="train-list-route elegant-list-route">{{ train.source }} <span class="arrow">→</span> {{ train.destination }}</div>
+            <div class="train-list-meta elegant-list-meta">
+              <span><i class="fa fa-calendar"></i> Date: <span class="meta-value">{{ train.date | date:'short' }}</span></span>
+              <span><i class="fa fa-chair"></i> Seats: <span class="meta-value">{{ train.totalSeats }}</span></span>
+            </div>
+            <div class="buy-ticket-section elegant-buy-section">
+              <input type="number" min="1" max="{{train.totalSeats}}" [(ngModel)]="seatInputs[train.id]" placeholder="Seat #" class="elegant-seat-input" />
+              <button (click)="buyTicket(train)" type="button" class="elegant-btn buy-btn">Buy Ticket</button>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="success elegant-success" *ngIf="buyMessage">{{ buyMessage }}</div>
+      <div class="error elegant-error" *ngIf="error">{{ error }}</div>
+    </div>
+  </div>
+</div>

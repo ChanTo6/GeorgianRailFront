@@ -1,0 +1,265 @@
+/* --- Elegant Custom Styles for Train Search --- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Roboto:wght@400;500;700&display=swap');
+
+.elegant-shadow {
+  box-shadow: 0 8px 32px rgba(40,62,81,0.18), 0 1.5px 4px rgba(33,150,243,0.08);
+}
+.elegant-gradient-text {
+  color: #fff;
+  font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 12px #3f51b5cc, 0 1.5px 0 #232b36cc;
+}
+.header-icon {
+  font-size: 1.5em;
+  vertical-align: middle;
+  margin-right: 0.3em;
+}
+.elegant-input {
+  font-family: 'Roboto', 'Montserrat', Arial, sans-serif;
+  font-size: 1.09rem;
+  border: 1.5px solid #7c3aed;
+  background: #f7f8fa;
+  border-radius: 0.7rem;
+  padding: 0.9rem 1.2rem;
+  transition: border 0.18s, box-shadow 0.18s;
+  box-shadow: 0 2px 8px #7c3aed11;
+}
+.elegant-input:focus {
+  border: 1.5px solid #3f51b5;
+  box-shadow: 0 4px 16px #3f51b522;
+}
+.elegant-btn {
+  font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+  font-size: 1.13rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: linear-gradient(90deg, #3f51b5 0%, #7c3aed 100%);
+  border: none;
+  border-radius: 0.7rem;
+  padding: 0.95rem 2.1rem;
+  box-shadow: 0 6px 24px rgba(40,62,81,0.13), 0 1.5px 4px rgba(33,150,243,0.08);
+  transition: background 0.18s, box-shadow 0.18s, transform 0.12s;
+  cursor: pointer;
+  margin-top: 0.2rem;
+  outline: none;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+.elegant-btn:hover, .elegant-btn:focus {
+  background: linear-gradient(90deg, #7c3aed 0%, #3f51b5 100%);
+  box-shadow: 0 10px 32px rgba(33,150,243,0.22);
+  transform: translateY(-2px) scale(1.04);
+}
+.elegant-results {
+  background: #f7f8fa;
+  border-radius: 1.1rem;
+  box-shadow: 0 2px 12px #7c3aed11;
+  font-family: 'Roboto', 'Montserrat', Arial, sans-serif;
+  max-height: 340px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+.elegant-list-item {
+  background: #fff;
+  border-radius: 1.1rem;
+  box-shadow: 0 2px 8px #3f51b511;
+  padding: 1.2rem 1.5rem 1.1rem 1.5rem;
+  margin-bottom: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  border: 1.5px solid #e3eafc;
+}
+.elegant-list-title {
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: #3f51b5;
+  font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+}
+.elegant-list-route {
+  color: #232b36;
+  font-size: 1.05rem;
+  margin-bottom: 0.1rem;
+  font-family: 'Roboto', Arial, sans-serif;
+}
+.elegant-list-meta {
+  font-size: 1.01rem;
+  color: #555;
+  display: flex;
+  gap: 1.5em;
+  font-family: 'Roboto', Arial, sans-serif;
+}
+.meta-value {
+  color: #7c3aed;
+  font-weight: 700;
+}
+.elegant-buy-section {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  margin-top: 0.5em;
+}
+.elegant-seat-input {
+  width: 90px;
+  padding: 0.7rem 1rem;
+  border-radius: 0.6rem;
+  border: 1.5px solid #3f51b5;
+  font-size: 1.05rem;
+  background: #f7f8fa;
+  font-family: 'Roboto', Arial, sans-serif;
+  margin-right: 8px;
+  transition: border 0.18s, box-shadow 0.18s;
+}
+.elegant-seat-input:focus {
+  border: 1.5px solid #7c3aed;
+  box-shadow: 0 2px 8px #7c3aed22;
+}
+.buy-btn {
+  padding: 0.85rem 1.7rem;
+  font-size: 1.09rem;
+}
+.elegant-success {
+  color: #43a047;
+  font-weight: 700;
+  font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+  margin-top: 12px;
+  text-align: center;
+}
+.elegant-error {
+  color: #d32f2f;
+  font-weight: 700;
+  font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+  margin-top: 12px;
+  text-align: center;
+}
+
+/* Banner background for train search */
+.train-search-banner-bg {
+  background: linear-gradient(rgba(34,43,54,0.72), rgba(34,43,54,0.82)), url('/assets/images/Banner-1920x460px-1.jpg') center center/cover no-repeat;
+  min-height: 460px;
+  width: 100vw;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+/* Solid Card Container */
+.train-search-card {
+  background: #232b36e6;
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.13), 0 1.5px 0 #2228;
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 0 0 1.5rem 0;
+  font-family: 'Segoe UI', 'Montserrat', Arial, sans-serif;
+}
+.train-search-header {
+  background: #1f2530;
+  color: #fff;
+  font-size: 1.45rem;
+  font-weight: 700;
+  border-top-left-radius: 1.2rem;
+  border-top-right-radius: 1.2rem;
+  padding: 1.2rem 2rem 1.1rem 2rem;
+  letter-spacing: 0.03em;
+  box-shadow: 0 2px 8px #0002;
+  text-align: center;
+}
+.train-search-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding: 1.5rem 2rem 0.5rem 2rem;
+}
+input {
+  padding: 0.85rem 1.1rem;
+  border: 1.5px solid #3f4a5a;
+  border-radius: 0.6rem;
+  font-size: 1.08rem;
+  background: #f7f8fa;
+  color: #232b36;
+  outline: none;
+  transition: border 0.18s;
+}
+input:focus {
+  border: 1.5px solid #7c3aed;
+}
+button {
+  background: linear-gradient(90deg, #3f51b5 0%, #7c3aed 100%);
+  color: #fff;
+  border: none;
+  border-radius: 0.6rem;
+  padding: 0.85rem 1.5rem;
+  font-size: 1.08rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.18s;
+  margin-top: 0.2rem;
+  box-shadow: 0 2px 8px #0001;
+}
+button:hover {
+  background: linear-gradient(90deg, #7c3aed 0%, #3f51b5 100%);
+  transform: scale(1.04);
+}
+.results {
+  margin-top: 1.5rem;
+  background: #fff;
+  border-radius: 0.9rem;
+  box-shadow: 0 1px 8px #0002;
+  padding: 1.2rem 1.5rem 1.2rem 1.5rem;
+}
+.results-header {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: #232b36;
+  margin-bottom: 0.7rem;
+  letter-spacing: 0.01em;
+}
+.results ul {
+  padding-left: 0;
+  list-style: none;
+}
+.results li {
+  margin-bottom: 1.1rem;
+}
+.train-list-item {
+  background: #f7f8fa;
+  border-radius: 0.7rem;
+  padding: 1rem 1.2rem 0.8rem 1.2rem;
+  box-shadow: 0 1px 4px #0001;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.train-list-title {
+  font-size: 1.13rem;
+  font-weight: 600;
+  color: #3f51b5;
+}
+.train-list-route {
+  color: #232b36;
+  font-size: 1.01rem;
+  margin-bottom: 0.1rem;
+}
+.arrow {
+  color: #7c3aed;
+  font-weight: bold;
+  margin: 0 0.2em;
+}
+.train-list-meta {
+  font-size: 0.97rem;
+  color: #555;
+  display: flex;
+  gap: 1.2em;
+}
+.error {
+  color: #d32f2f;
+  margin-top: 0.7rem;
+  text-align: center;
+}

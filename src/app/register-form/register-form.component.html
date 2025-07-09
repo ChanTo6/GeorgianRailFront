@@ -1,0 +1,27 @@
+
+<div class="register-bg">
+  <form class="register-form-white" (ngSubmit)="register()">
+    <h2 class="register-title">Create Account</h2>
+    <div class="register-fields-row">
+      <div class="register-field-col">
+        <label class="register-label" for="register-email">Email</label>
+        <input id="register-email" type="email" [(ngModel)]="email" name="email" placeholder="Enter your email" required />
+      </div>
+      <div class="register-field-col">
+        <label class="register-label" for="register-password">Password</label>
+        <input id="register-password" type="password" [(ngModel)]="password" name="password" placeholder="Create a password" required />
+      </div>
+    </div>
+    <div class="register-form-actions">
+      <button class="register-btn-main" type="submit">Register</button>
+    </div>
+    <div class="register-messages">
+      <div class="register-error" *ngIf="error">{{ error }}</div>
+      <div class="register-success" *ngIf="success">{{ success }}</div>
+    </div>
+    <div class="register-links-row">
+      <button type="button" class="register-link-btn" (click)="goToLogin()">Already have an account? Login</button>
+      <button type="button" class="register-link-btn" (click)="goToHome()">Back to Home</button>
+    </div>
+  </form>
+</div>
