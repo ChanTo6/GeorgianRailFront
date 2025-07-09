@@ -9,19 +9,23 @@ import { TrainSearchComponent } from './train-search/train-search.component';
 import { TicketBuyComponent } from './ticket-buy/ticket-buy.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TranslatePipe } from './services/translate.pipe';
+import { LanguageSwitcherComponent } from './shared/language-switcher.component';
 
 import { FirstComponent } from './first-page/first/first.component';
 import { JwtInterceptor } from './jwt.interceptor';
 
 @NgModule({
   declarations: [
-       AppComponent,
+    AppComponent,
     RegisterFormComponent,
     LoginFormComponent,
     TrainSearchComponent,
     TicketBuyComponent,
     AdminPanelComponent,
-    FirstComponent
+    FirstComponent,
+    TranslatePipe,
+    LanguageSwitcherComponent
   ],
   imports: [
     BrowserModule,

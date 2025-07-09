@@ -1,29 +1,29 @@
 <form (ngSubmit)="addTrain()">
-  <h2>Add Train (Admin)</h2>
-  <input type="number" [(ngModel)]="trainId" name="trainId" placeholder="Train ID" (blur)="validateForm()" />
+  <h2>{{ 'admin.addTrain' | translate }}</h2>
+  <input type="number" [(ngModel)]="trainId" name="trainId" [placeholder]="'train.id' | translate" (blur)="validateForm()" />
   <div class="error" *ngIf="trainIdError">{{ trainIdError }}</div>
-  <input type="text" [(ngModel)]="name" name="name" placeholder="Train Name" (blur)="validateForm()" />
+  <input type="text" [(ngModel)]="name" name="name" [placeholder]="'train.name' | translate" (blur)="validateForm()" />
   <div class="error" *ngIf="nameError">{{ nameError }}</div>
-  <input type="text" [(ngModel)]="source" name="source" placeholder="Source" (blur)="validateForm()" />
+  <input type="text" [(ngModel)]="source" name="source" [placeholder]="'train.source' | translate" (blur)="validateForm()" />
   <div class="error" *ngIf="sourceError">{{ sourceError }}</div>
-  <input type="text" [(ngModel)]="destination" name="destination" placeholder="Destination" (blur)="validateForm()" />
+  <input type="text" [(ngModel)]="destination" name="destination" [placeholder]="'train.destination' | translate" (blur)="validateForm()" />
   <div class="error" *ngIf="destinationError">{{ destinationError }}</div>
-  <input type="datetime-local" [(ngModel)]="date" name="date" placeholder="Date" (blur)="validateForm()" />
+  <input type="datetime-local" [(ngModel)]="date" name="date" [placeholder]="'train.date' | translate" (blur)="validateForm()" />
   <div class="error" *ngIf="dateError">{{ dateError }}</div>
-  <input type="text" [(ngModel)]="time" name="time" placeholder="Time" (blur)="validateForm()" />
+  <input type="text" [(ngModel)]="time" name="time" [placeholder]="'train.time' | translate" (blur)="validateForm()" />
   <div class="error" *ngIf="timeError">{{ timeError }}</div>
-  <input type="number" [(ngModel)]="totalSeats" name="totalSeats" placeholder="Total Seats" (blur)="validateForm()" />
+  <input type="number" [(ngModel)]="totalSeats" name="totalSeats" [placeholder]="'train.totalseats' | translate" (blur)="validateForm()" />
   <div class="error" *ngIf="totalSeatsError">{{ totalSeatsError }}</div>
-  <button type="submit" [disabled]="!validateForm()">Add Train</button>
+  <button type="submit" [disabled]="!validateForm()">{{ 'train.add' | translate }}</button>
   <div class="success" *ngIf="adminSuccess">{{ adminSuccess }}</div>
   <div class="error" *ngIf="adminError">{{ adminError }}</div>
 </form>
-<button (click)="getSoldTickets()" style="margin: 1rem auto; display: block;">View Sold Tickets</button>
+<button (click)="getSoldTickets()" style="margin: 1rem auto; display: block;">{{ 'tickets.viewSold' | translate }}</button>
 <div class="tickets" *ngIf="soldTickets.length">
-  <h3>Sold Tickets</h3>
+  <h3>{{ 'tickets.sold' | translate }}</h3>
   <ul>
     <li *ngFor="let ticket of soldTickets">
-      <strong>User:</strong> {{ ticket.userId }}, <strong>Train:</strong> {{ ticket.trainId }}, <strong>Seat:</strong> {{ ticket.seatNumber }}
+      <strong>{{ 'tickets.user' | translate }}</strong> {{ ticket.userId }}, <strong>{{ 'tickets.train' | translate }}</strong> {{ ticket.trainId }}, <strong>{{ 'tickets.seat' | translate }}</strong> {{ ticket.seatNumber }}
     </li>
   </ul>
 </div>

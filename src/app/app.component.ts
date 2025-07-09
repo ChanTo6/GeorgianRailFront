@@ -1,14 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
+import { TranslationService } from './services/translation.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'my-app';
 
-  ngOnInit() {}
+export class AppComponent implements OnInit, OnDestroy {
+  title = 'my-app';
+  private langSub: any;
+
+  constructor(public translationService: TranslationService, private cdr: ChangeDetectorRef) {}
+
+  ngOnInit() {
+    this.langSub = this.translationService.onLangChange().subscribe(() => {
+      this.cdr.detectChanges();
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.langSub) this.langSub.unsubscribe();
+  }
 
   get isAdmin(): boolean {
     if (typeof window === 'undefined' || !window.localStorage) return false;
@@ -60,5 +73,9 @@ export class AppComponent {
   isAuthPage(): boolean {
     const path = window.location.pathname;
     return path === '/login' || path === '/register';
+  }
+
+  setLanguage(lang: string) {
+    this.translationService.setLanguage(lang).subscribe();
   }
 }

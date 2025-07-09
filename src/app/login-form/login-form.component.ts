@@ -60,8 +60,13 @@ export class LoginFormComponent {
     this.router.navigate(['/']);
   }
 
+
   goToRegister() {
     this.router.navigate(['/register']);
+  }
+
+  goToFirstComponent() {
+    this.router.navigate(['/']);
   }
 
   get isAdmin(): boolean {

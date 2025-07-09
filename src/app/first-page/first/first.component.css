@@ -51,9 +51,9 @@
 }
 /* Wider Login Prompt Modal */
 .ticket-modal-backdrop .ticket-modal {
-  min-width: 850px;
-  max-width: 95vw;
-  width: 420px;
+  min-width: 1050px;
+  max-width: 100vw;
+  width: 700px;
 }
 /* Consolidated .ticket-icon and .elegant-ticket-table classes below */
 .ticket-icon {
@@ -753,7 +753,7 @@ button.view-tickets-btn .icon-ticket {
 }
 .vertical-stripe-bottom {
   /* flex: 1 1 auto; */
-  min-height: 572px;
+  min-height: 700px;
 }
 .stripe-gap {
   width: 100%;
@@ -789,3 +789,47 @@ button.view-tickets-btn .icon-ticket {
 }
 /* Removed empty ruleset for .stripe-label-text-1, .stripe-label-text-2 */
 /* --- End Vertical White Stripe --- */
+.lang-btn {
+  background: #fff;
+  border: 2px solid #1976d2;
+  color: #1976d2;
+  font-weight: 600;
+  font-size: 1.08em;
+  padding: 0.25em 1.1em 0.25em 0.7em;
+  border-radius: 22px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  transition: background 0.2s, color 0.2s, border 0.2s, box-shadow 0.2s;
+  outline: none;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.07);
+  min-width: 110px;
+  margin: 0 2px;
+}
+.lang-btn .flag-icon {
+  font-size: 1.35em;
+  margin-right: 0.3em;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.08));
+}
+.lang-btn .lang-label {
+  font-size: 1.04em;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.lang-btn.active-lang, .lang-btn:focus, .lang-btn:hover {
+  background: #1976d2;
+  color: #fff;
+  border-color: #1976d2;
+  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.13);
+}
+
+.language-switcher {
+  border-radius: 16px;
+  padding: 0.3em 0.9em;
+  box-shadow: none;
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  background: none !important;
+}

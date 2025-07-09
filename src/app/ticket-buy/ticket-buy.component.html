@@ -1,9 +1,9 @@
 <form (ngSubmit)="buyTickets()">
-  <h2>Buy Ticket</h2>
-  <input type="number" [(ngModel)]="userId" name="userId" placeholder="User ID" required />
-  <input type="number" [(ngModel)]="trainId" name="trainId" placeholder="Train ID" required />
-  <input type="number" [(ngModel)]="seatNumber" name="seatNumber" placeholder="Seat Number" required />
-  <button type="submit">Buy</button>
+  <h2>{{ 'buy.ticket.title' | translate }}</h2>
+  <input type="number" [(ngModel)]="userId" name="userId" [placeholder]="'user.id' | translate" required />
+  <input type="number" [(ngModel)]="trainId" name="trainId" [placeholder]="'train.id' | translate" required />
+  <input type="number" [(ngModel)]="seatNumber" name="seatNumber" [placeholder]="'seat.number' | translate" required />
+  <button type="submit">{{ 'buy' | translate }}</button>
   <div class="success" *ngIf="success">{{ success }}</div>
   <div class="error" *ngIf="error">{{ error }}</div>
 </form>

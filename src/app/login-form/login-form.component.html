@@ -1,47 +1,40 @@
 <div class="login-bg">
   <div class="login-form-outer">
     <button class="login-close-btn" aria-label="Close" (click)="closeLogin()">×</button>
-    <img src="assets/images/logo.png" alt="Logo" class="login-logo-pos login-logo-pos--higher" />
-    <div class="register-row register-row--below-logo register-row--vertical">
-      <span class="register-text">Are you registered?</span>
-      <button type="button" class="register-btn" (click)="goToRegister()">Registration</button>
-    </div>
-    <div class="login-form-inset-border">
-      <svg class="login-inset-border-svg" width="100%" height="100%" viewBox="0 0 400 520" preserveAspectRatio="none">
-        <!-- Top edge: left to before top-right cutout (shorter, does not reach all the way right) -->
-        <line x1="15" y1="16" x2="350" y2="15" stroke="#d32f2f" stroke-width="3.5" />
-        <!-- Right edge: start even lower (not from top), after top-right cutout to bottom -->
-        <line x1="385" y1="70" x2="385" y2="506" stroke="#d32f2f" stroke-width="2" />
-        <!-- Bottom edge: right to before bottom-center gap (wider gap) -->
-        <line x1="385" y1="505" x2="245" y2="505" stroke="#d32f2f" stroke-width="3.5" />
-        <!-- Bottom edge: after bottom-center gap to left (wider gap) -->
-        <line x1="155" y1="505" x2="15" y2="505" stroke="#d32f2f" stroke-width="3.5" />
-        <!-- Left edge: bottom to before left-center gap (wider gap) -->
-        <line x1="15" y1="506" x2="15" y2="315" stroke="#d32f2f" stroke-width="2" />
-        <!-- Left edge: after left-center gap to top (wider gap) -->
-        <line x1="15" y1="205" x2="15" y2="15" stroke="#d32f2f" stroke-width="2" />
-      </svg>
-      <form class="login-form-white" (ngSubmit)="login()">
+    <img src="assets/images/logo.png" alt="Logo" class="login-logo" />
+    <!-- Language Switcher -->
 
-        <div class="login-fields-row">
-          <div class="login-field-col">
-            <label class="login-label" for="login-email">Email</label>
-            <input id="login-email" type="email" [(ngModel)]="email" name="email" placeholder="Enter your email" required />
-            <div class="login-error" *ngIf="emailError">{{ emailError }}</div>
-          </div>
-          <div class="login-field-col">
-            <label class="login-label" for="login-password">Password</label>
-            <input id="login-password" type="password" [(ngModel)]="password" name="password" placeholder="Enter your password" required />
-            <div class="login-error" *ngIf="passwordError">{{ passwordError }}</div>
-          </div>
-        </div>
-        <button type="submit" class="login-btn-pos">Login</button>
-        <div class="forgot-password-row">
-          <a class="forgot-password-link" href="#">Forgot Password?</a>
-        </div>
-        <div class="error" *ngIf="error">{{ error }}</div>
-        <div class="success" *ngIf="success">{{ success }}</div>
-      </form>
+    <div class="register-row register-row--below-logo register-row--vertical">
+      <span class="register-text">{{ 'login.haveAccount' | translate }}</span>
+      <button type="button" class="register-btn elegant-register-btn" (click)="goToRegister()">
+        <span class="register-icon" aria-hidden="true" style="font-size:1.3em; line-height:1; display:flex; align-items:center;">👤</span>
+        {{ 'register' | translate }}
+      </button>
+      <button type="button" class="route-first-btn" (click)="goToFirstComponent()">
+        <span class="route-icon" aria-hidden="true" style="font-size:1.2em; margin-right:0.5em;">🏠</span>
+        {{ 'common.home' | translate }}
+      </button>
     </div>
+    <form class="login-form-white elegant-login-form" (ngSubmit)="login()">
+      <h2 class="login-title">{{ 'login.title' | translate }}</h2>
+      <div class="login-fields-row">
+        <div class="login-field-col">
+          <label class="login-label" for="login-email">{{ 'email.label' | translate }}</label>
+          <input id="login-email" type="email" [(ngModel)]="email" name="email" [placeholder]="'email.label' | translate" required autocomplete="username" />
+          <div class="login-error" *ngIf="emailError">{{ emailError }}</div>
+        </div>
+        <div class="login-field-col">
+          <label class="login-label" for="login-password">{{ 'password.label' | translate }}</label>
+          <input id="login-password" type="password" [(ngModel)]="password" name="password" [placeholder]="'password.label' | translate" required autocomplete="current-password" />
+          <div class="login-error" *ngIf="passwordError">{{ passwordError }}</div>
+        </div>
+      </div>
+      <button type="submit" class="login-btn-pos elegant-login-btn">{{ 'login' | translate }}</button>
+      <div class="forgot-password-row">
+        <a class="forgot-password-link" href="#">{{ 'password.forgot' | translate }}</a>
+      </div>
+      <div class="error" *ngIf="error">{{ error }}</div>
+      <div class="success" *ngIf="success">{{ success }}</div>
+    </form>
   </div>
 </div>

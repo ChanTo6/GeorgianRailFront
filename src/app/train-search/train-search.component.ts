@@ -41,7 +41,7 @@ export class TrainSearchComponent {
     // Only allow numeric userId as required by backend
     const userId = userData?.id;
     if (typeof userId !== 'number') {
-      this.error = 'User ID is missing or invalid. Please log in again.';
+      this.error = 'You are Not Logged In.';
       return;
     }
     const data = {

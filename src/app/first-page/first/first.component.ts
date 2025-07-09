@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { AdminService } from '../../services/admin.service';
+import { TranslationService } from '../../services/translation.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -14,9 +15,9 @@ export class FirstComponent implements OnInit, OnDestroy {
   @Output() scrollToTrainSearch = new EventEmitter<void>();
 
   backgroundImages = [
-    { src: 'assets/images/infrastruqtura-mtavari.jpg', name: 'ინფრასტრუქტურა' },
-    { src: 'assets/images/samgzavro-mtavari.jpg', name: 'სამგზავრო გადაყვანები' },
-    { src: 'assets/images/satvirto-mtavari.jpg', name: 'სამგზავრო გადაზიდვები' }
+    { src: 'assets/images/infrastruqtura-mtavari.jpg', name: 'infrastructure' },
+    { src: 'assets/images/samgzavro-mtavari.jpg', name: 'passenger transportation' },
+    { src: 'assets/images/satvirto-mtavari.jpg', name: 'freight transportation' }
   ];
   currentBgIndex = 0;
   backgroundImage = this.backgroundImages[0].src;
@@ -28,14 +29,21 @@ export class FirstComponent implements OnInit, OnDestroy {
   isAdmin = false;
   persondata: any;
   private userSub?: Subscription;
+  currentLang: string;
 
   constructor(
     private zone: NgZone,
     private router: Router,
     public auth: AuthService,
     private userService: UserService,
-    private adminService: AdminService
-  ) {}
+    private adminService: AdminService,
+    private translationService: TranslationService
+  ) {
+    this.currentLang = this.translationService.getCurrentLang();
+    this.translationService.onLangChange().subscribe((lang: string) => {
+      this.currentLang = lang;
+    });
+  }
 
   ngOnInit(): void {
     this.loadUserTickets();
@@ -246,5 +254,11 @@ export class FirstComponent implements OnInit, OnDestroy {
     } catch {
       return null;
     }
+  }
+
+  setLanguage(lang: string) {
+    this.translationService.setLanguage(lang).subscribe(() => {
+      this.currentLang = lang;
+    });
   }
 }

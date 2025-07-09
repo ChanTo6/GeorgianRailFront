@@ -1,26 +1,36 @@
 <div class="first-page-bg" [style.backgroundImage]="'url(' + backgroundImage + ')'">
   <div class="first-page-overlay">
-
+    <!-- Language Switcher (top right) -->
+    <div class="language-switcher" style="position:absolute; top:1.5em; left:2em; z-index:10; display:flex; gap:0.5em;">
+      <button (click)="setLanguage('en')" [class.active-lang]="currentLang === 'en'" class="lang-btn">
+        <span class="flag-icon" aria-label="English">🇬🇧</span>
+        <span class="lang-label">English</span>
+      </button>
+      <button (click)="setLanguage('ka')" [class.active-lang]="currentLang === 'ka'" class="lang-btn">
+        <span class="flag-icon" aria-label="Georgian">🇬🇪</span>
+        <span class="lang-label">ქართული</span>
+      </button>
+    </div>
     <!-- Slider Black Box -->
     <div class="slider-black-box">
       <div class="slider-row slider-btn-row">
         <button class="slider-btn slider-btn-left" (click)="prevBackground()">
-          <span class="slider-btn-icon">&#8592;</span>
-          <span class="slider-btn-label slider-btn-label-big">წინა</span>
+          <span class="slider-btn-icon" aria-hidden="true">&#8592;</span>
+          <span class="slider-btn-label slider-btn-label-big">{{ 'previous' | translate }}</span>
         </button>
         <button class="slider-btn slider-btn-right" (click)="nextBackground()" style="margin-right: 18px;">
-          <span class="slider-btn-label slider-btn-label-big">შემდეგი</span>
-          <span class="slider-btn-icon">&#8594;</span>
+          <span class="slider-btn-label slider-btn-label-big">{{ 'next' | translate }}</span>
+          <span class="slider-btn-icon" aria-hidden="true">&#8594;</span>
         </button>
       </div>
       <div class="slider-row slider-label-row">
         <span class="slider-label slider-label-prev">
-          <span class="slider-label-icon">&#10094;</span>
-          {{ prevName }}
+          <span class="slider-label-icon" aria-hidden="true">&#10094;</span>
+          {{ prevName | translate }}
         </span>
         <span class="slider-label slider-label-next">
-          {{ nextName }}
-          <span class="slider-label-icon">&#10095;</span>
+          {{ nextName | translate }}
+          <span class="slider-label-icon" aria-hidden="true">&#10095;</span>
         </span>
       </div>
     </div>
@@ -37,19 +47,19 @@
     <div class="vertical-stripe vertical-stripe-top"></div>
     <div class="stripe-gap stripe-gap-btn"></div>
     <button class="menu-btn-elegant elegant-admin-btn" (click)="openTicketsModal()">
-      <span class="menu-icon">&#128179;</span>
-      View Tickets
+      <span class="menu-icon" aria-hidden="true" style="font-size:1.3em; line-height:1; display:flex; align-items:center;">💳</span>
+      {{ 'view.tickets' | translate }}
     </button>
     <!-- Login Prompt Modal -->
     <div class="ticket-modal-backdrop" *ngIf="showLoginPromptModal" (click)="closeLoginPromptModal()">
       <div class="ticket-modal login-prompt-modal elegant-modal-block" (click)="$event.stopPropagation()">
         <button class="close-modal-btn" (click)="closeLoginPromptModal()">&times;</button>
         <span class="modal-header-icon" style="font-size:2.5em; color:#1976d2; margin-bottom:8px; display: flex; align-items: center; justify-content: center; width: 100%;">🔒</span>
-        <h2 class="login-prompt-title not-logged-in-title">You are not logged in</h2>
-        <p class="login-prompt-desc not-logged-in-desc">Please log in to view your tickets.</p>
+        <h2 class="login-prompt-title not-logged-in-title">{{ 'not.logged.in' | translate }}</h2>
+        <p class="login-prompt-desc not-logged-in-desc">{{ 'please.login.tickets' | translate }}</p>
         <button class="not-logged-in-btn login-prompt-btn" (click)="navigateTo('login')">
           <span class="menu-icon login-prompt-icon">🔑</span>
-          <span class="login-prompt-btn-text">Go to Login</span>
+          <span class="login-prompt-btn-text">{{ 'go.to.login' | translate }}</span>
         </button>
       </div>
     </div>
@@ -57,19 +67,19 @@
     <div class="ticket-modal-backdrop" *ngIf="ticketsModalOpen" (click)="closeTicketsModal()">
       <div class="ticket-modal ticket-modal-wide" (click)="$event.stopPropagation()">
         <button class="close-modal-btn" (click)="closeTicketsModal()">&times;</button>
-        <h2 *ngIf="isAdmin">All Sold Tickets</h2>
-        <h2 *ngIf="!isAdmin">My Tickets</h2>
+        <h2 *ngIf="isAdmin">{{ 'all.sold.tickets' | translate }}</h2>
+        <h2 *ngIf="!isAdmin">{{ 'my.tickets' | translate }}</h2>
         <div *ngIf="tickets && tickets.length > 0; else noTickets">
           <table class="elegant-ticket-table">
             <thead>
               <tr>
-                <th><span class="ticket-icon">🎫</span> Ticket ID</th>
-                <th><span class="ticket-icon">🚄</span> Train Name</th>
-                <th><span class="ticket-icon">#️⃣</span> Train ID</th>
-                <th><span class="ticket-icon">💺</span> Seat #</th>
-                <th><span class="ticket-icon">📧</span> Buyer Email</th>
-                <th><span class="ticket-icon">🆔</span> Buyer ID</th>
-                <th><span class="ticket-icon">🕒</span> Purchase Date</th>
+                <th><span class="ticket-icon">🎫</span> {{ 'ticket.id' | translate }}</th>
+                <th><span class="ticket-icon">🚄</span> {{ 'train.name' | translate }}</th>
+                <th><span class="ticket-icon">#️⃣</span> {{ 'train.id' | translate }}</th>
+                <th><span class="ticket-icon">💺</span> {{ 'seat.number' | translate }}</th>
+                <th><span class="ticket-icon">📧</span> {{ 'buyer.email' | translate }}</th>
+                <th><span class="ticket-icon">🆔</span> {{ 'buyer.id' | translate }}</th>
+                <th><span class="ticket-icon">🕒</span> {{ 'purchase.date' | translate }}</th>
               </tr>
             </thead>
             <tbody>
@@ -86,7 +96,7 @@
           </table>
         </div>
         <ng-template #noTickets>
-          <p>No tickets found.</p>
+          <p>{{ 'no.tickets.found' | translate }}</p>
         </ng-template>
       </div>
     </div>
@@ -95,30 +105,30 @@
     <div class="stripe-gap stripe-gap-between"></div>
     <button *ngIf="isAdmin" class="menu-btn-elegant elegant-admin-btn" (click)="showAddTrainForm = true">
       <span class="menu-icon">&#9881;</span>
-      For Admin
+      {{ 'for.admin' | translate }}
     </button>
     <!-- Add Train Modal -->
     <div class="ticket-modal-backdrop" *ngIf="showAddTrainForm" (click)="showAddTrainForm = false">
       <div class="ticket-modal add-train-modal" (click)="$event.stopPropagation()">
         <button class="close-modal-btn" (click)="showAddTrainForm = false">&times;</button>
-        <h2 class="add-train-title">Add New Train</h2>
+        <h2 class="add-train-title">{{ 'add.new.train' | translate }}</h2>
         <form (ngSubmit)="submitAddTrain()" #addTrainForm="ngForm" class="add-train-form">
           <div class="form-row">
-            <input class="elegant-input" name="trainId" [(ngModel)]="addTrainData.trainId" type="number" placeholder="Train ID" required />
-            <input class="elegant-input" name="name" [(ngModel)]="addTrainData.name" type="text" placeholder="Train Name" required />
+            <input class="elegant-input" name="trainId" [(ngModel)]="addTrainData.trainId" type="number" [placeholder]="'train.id' | translate" required />
+            <input class="elegant-input" name="name" [(ngModel)]="addTrainData.name" type="text" [placeholder]="'train.name' | translate" required />
           </div>
           <div class="form-row">
-            <input class="elegant-input" name="source" [(ngModel)]="addTrainData.source" type="text" placeholder="Source" required />
-            <input class="elegant-input" name="destination" [(ngModel)]="addTrainData.destination" type="text" placeholder="Destination" required />
+            <input class="elegant-input" name="source" [(ngModel)]="addTrainData.source" type="text" [placeholder]="'train.source' | translate" required />
+            <input class="elegant-input" name="destination" [(ngModel)]="addTrainData.destination" type="text" [placeholder]="'train.destination' | translate" required />
           </div>
           <div class="form-row">
-            <input class="elegant-input" name="date" [(ngModel)]="addTrainData.date" type="date" placeholder="Date" required />
-            <input class="elegant-input" name="time" [(ngModel)]="addTrainData.time" type="time" placeholder="Time" required />
+            <input class="elegant-input" name="date" [(ngModel)]="addTrainData.date" type="date" [placeholder]="'train.date' | translate" required />
+            <input class="elegant-input" name="time" [(ngModel)]="addTrainData.time" type="time" [placeholder]="'train.time' | translate" required />
           </div>
           <div class="form-row">
-            <input class="elegant-input" name="totalSeats" [(ngModel)]="addTrainData.totalSeats" type="number" placeholder="Total Seats" required />
+            <input class="elegant-input" name="totalSeats" [(ngModel)]="addTrainData.totalSeats" type="number" [placeholder]="'train.totalseats' | translate" required />
           </div>
-          <button class="add-train-btn" type="submit">Add Train</button>
+          <button class="add-train-btn" type="submit">{{ 'add.train' | translate }}</button>
         </form>
       </div>
     </div>
@@ -130,30 +140,30 @@
     <div class="menu-dropdown-elegant" [class.open]="menuOpen" (click)="$event.stopPropagation()">
       <ng-container *ngIf="!userData; else loggedInMenu">
         <button class="menu-btn-elegant" (click)="navigateTo('register')">
-          <span class="menu-icon">&#128100;</span>
-          Register
+          <span class="menu-icon" aria-hidden="true" style="font-size:1.3em; line-height:1; display:flex; align-items:center;">👤</span>
+          {{ 'register' | translate }}
         </button>
         <button class="menu-btn-elegant" (click)="navigateTo('login')">
-          <span class="menu-icon">&#128274;</span>
-          Login
+          <span class="menu-icon" aria-hidden="true" style="font-size:1.3em; line-height:1; display:flex; align-items:center;">🔒</span>
+          {{ 'login' | translate }}
         </button>
         <button class="menu-btn-elegant" (click)="handleBookTicketClick()">
-          <span class="menu-icon">&#128649;</span>
-          Book a Ticket
+          <span class="menu-icon" aria-hidden="true" style="font-size:1.3em; line-height:1; display:flex; align-items:center;">🚄</span>
+          {{ 'book.ticket' | translate }}
         </button>
       </ng-container>
       <ng-template #loggedInMenu>
         <div class="menu-user-info">
           <span class="menu-icon">&#128100;</span>
-          <span *ngIf="userData">{{ userData.email || userData.username || 'User' }}</span>
+          <span *ngIf="userData">{{ userData.email || userData.username || ('user' | translate) }}</span>
         </div>
         <button class="menu-btn-elegant" (click)="scrollToTrainSearch.emit()">
           <span class="menu-icon">&#128179;</span>
-          My Booked Tickets
+          {{ 'my.booked.tickets' | translate }}
         </button>
         <button class="menu-btn-elegant" (click)="logout()">
           <span class="menu-icon">&#128682;</span>
-          Logout
+          {{ 'logout' | translate }}
         </button>
       </ng-template>
     </div>
