@@ -26,8 +26,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  register(data: { email: string; password: string}): Observable<any> {
-    
+  register(data: { email: string; password: string; }): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, data).pipe(
       catchError(this.handleError)
     );
@@ -42,6 +41,12 @@ export class AuthService {
           localStorage.setItem('jwt', res.token);
         }
       }),
+      catchError(this.handleError)
+    );
+  }
+
+  verifyPin(data: { email: string; pin: string }): Observable<any> {
+    return this.http.post(`${this.apiUrl}/verify-pin`, data).pipe(
       catchError(this.handleError)
     );
   }

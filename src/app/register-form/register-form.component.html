@@ -1,19 +1,29 @@
-
 <div class="register-bg">
   <form class="register-form-white" (ngSubmit)="register()">
     <h2 class="register-title">Create Account</h2>
     <div class="register-fields-row">
       <div class="register-field-col">
         <label class="register-label" for="register-email">Email</label>
-        <input id="register-email" type="email" [(ngModel)]="email" name="email" placeholder="Enter your email" required />
+        <input id="register-email" type="email" [(ngModel)]="email" name="email" placeholder="Enter your email" required (blur)="validateForm()" />
+        <div class="register-error" *ngIf="emailError">{{ emailError }}</div>
       </div>
       <div class="register-field-col">
         <label class="register-label" for="register-password">Password</label>
-        <input id="register-password" type="password" [(ngModel)]="password" name="password" placeholder="Create a password" required />
+        <input id="register-password" type="password" [(ngModel)]="password" name="password" placeholder="Create a password" required (blur)="validateForm()" />
+        <div class="register-error" *ngIf="passwordError">{{ passwordError }}</div>
       </div>
     </div>
     <div class="register-form-actions">
-      <button class="register-btn-main" type="submit">Register</button>
+      <!-- <button class="register-btn-main" type="submit" [disabled]="!validateForm()">Register</button> -->
+      <button class="register-btn-main" type="button" (click)="sendPin()" [disabled]="pinSent || !validateForm()">Send PIN</button>
+      <button class="register-btn-main" type="button" (click)="togglePinInput()" *ngIf="pinSent && !showPinInput">Enter PIN</button>
+    </div>
+    <div *ngIf="showPinInput" class="register-pin-section">
+      <label for="register-pin">Enter PIN</label>
+      <input id="register-pin" type="text" [(ngModel)]="pin" name="pin" maxlength="6" placeholder="Enter 6-digit PIN" required (blur)="validatePinInput()" />
+      <button class="register-btn-main" type="button" (click)="verifyPin()" [disabled]="!validatePinInput()">Register</button>
+      <div class="register-error" *ngIf="pinError">{{ pinError }}</div>
+      <div class="register-success" *ngIf="pinSuccess">{{ pinSuccess }}</div>
     </div>
     <div class="register-messages">
       <div class="register-error" *ngIf="error">{{ error }}</div>

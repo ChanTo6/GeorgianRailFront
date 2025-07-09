@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { CustomAuthValidators } from '../validators/custom-auth.validators';
 
 @Component({
   selector: 'login-form',
@@ -12,13 +13,23 @@ export class LoginFormComponent {
   password = '';
   error = '';
   success = '';
- 
+  emailError = '';
+  passwordError = '';
 
   constructor(private auth: AuthService, private router: Router) {}
+
+  validateForm(): boolean {
+    this.emailError = CustomAuthValidators.validateEmail(this.email) || '';
+    this.passwordError = CustomAuthValidators.validatePassword(this.password) || '';
+    return !this.emailError && !this.passwordError;
+  }
 
   login() {
     this.error = '';
     this.success = '';
+    if (!this.validateForm()) {
+      return;
+    }
     this.auth.login({ email: this.email, password: this.password })
       .subscribe({
         next: (res: any) => {
