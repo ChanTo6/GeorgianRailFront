@@ -44,13 +44,11 @@ export class RegisterFormComponent {
       });
   }
 
-  // Call this from any button to route to this component
   static routeToRegister(router: Router) {
     router.navigate(['/register']);
   }
 
-  // Or, for use in a template:
-
+ 
 
   goTofirstpage() {
     this.router.navigate(['/firstpage']);

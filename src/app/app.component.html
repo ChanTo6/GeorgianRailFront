@@ -1,8 +1,9 @@
-<!-- <app-language-switcher></app-language-switcher> -->
+
 <ng-container *ngIf="!isAuthPage()">
   <app-first (scrollToTrainSearch)="scrollToTrainSearchSection()"></app-first>
   <div id="train-search-section" style="scroll-margin-top: 80px;">
     <train-search></train-search>
   </div>
+  <admin-panel *ngIf="adminPanelVisible"></admin-panel>
 </ng-container>
 <router-outlet></router-outlet>

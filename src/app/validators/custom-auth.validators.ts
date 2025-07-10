@@ -1,7 +1,7 @@
 export class CustomAuthValidators {
   static validateEmail(email: string): string | null {
     if (!email) return 'Email is required.';
-    // Simple regex for demonstration; you can use a stricter one if needed
+   
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return 'Please enter a valid email address.';
     return null;
   }

@@ -22,7 +22,7 @@ export class CustomTrainValidators {
 
   static validateDate(date: string): string | null {
     if (!date) return 'Date is required.';
-    // Optionally, add more date format validation here
+    
     return null;
   }
 

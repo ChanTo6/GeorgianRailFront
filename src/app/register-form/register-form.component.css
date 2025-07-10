@@ -36,7 +36,7 @@ body, .register-bg, .register-form-white, .register-label, .register-field-col i
 .register-form-white {
   position: relative;
   z-index: 3;
-  /* ...existing code... */
+ 
 }
 
 .register-form-white {

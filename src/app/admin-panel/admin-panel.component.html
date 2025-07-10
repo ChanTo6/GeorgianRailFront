@@ -1,29 +1,116 @@
-<form (ngSubmit)="addTrain()">
-  <h2>{{ 'admin.addTrain' | translate }}</h2>
-  <input type="number" [(ngModel)]="trainId" name="trainId" [placeholder]="'train.id' | translate" (blur)="validateForm()" />
-  <div class="error" *ngIf="trainIdError">{{ trainIdError }}</div>
-  <input type="text" [(ngModel)]="name" name="name" [placeholder]="'train.name' | translate" (blur)="validateForm()" />
-  <div class="error" *ngIf="nameError">{{ nameError }}</div>
-  <input type="text" [(ngModel)]="source" name="source" [placeholder]="'train.source' | translate" (blur)="validateForm()" />
-  <div class="error" *ngIf="sourceError">{{ sourceError }}</div>
-  <input type="text" [(ngModel)]="destination" name="destination" [placeholder]="'train.destination' | translate" (blur)="validateForm()" />
-  <div class="error" *ngIf="destinationError">{{ destinationError }}</div>
-  <input type="datetime-local" [(ngModel)]="date" name="date" [placeholder]="'train.date' | translate" (blur)="validateForm()" />
-  <div class="error" *ngIf="dateError">{{ dateError }}</div>
-  <input type="text" [(ngModel)]="time" name="time" [placeholder]="'train.time' | translate" (blur)="validateForm()" />
-  <div class="error" *ngIf="timeError">{{ timeError }}</div>
-  <input type="number" [(ngModel)]="totalSeats" name="totalSeats" [placeholder]="'train.totalseats' | translate" (blur)="validateForm()" />
-  <div class="error" *ngIf="totalSeatsError">{{ totalSeatsError }}</div>
-  <button type="submit" [disabled]="!validateForm()">{{ 'train.add' | translate }}</button>
-  <div class="success" *ngIf="adminSuccess">{{ adminSuccess }}</div>
-  <div class="error" *ngIf="adminError">{{ adminError }}</div>
-</form>
-<button (click)="getSoldTickets()" style="margin: 1rem auto; display: block;">{{ 'tickets.viewSold' | translate }}</button>
-<div class="tickets" *ngIf="soldTickets.length">
-  <h3>{{ 'tickets.sold' | translate }}</h3>
-  <ul>
-    <li *ngFor="let ticket of soldTickets">
-      <strong>{{ 'tickets.user' | translate }}</strong> {{ ticket.userId }}, <strong>{{ 'tickets.train' | translate }}</strong> {{ ticket.trainId }}, <strong>{{ 'tickets.seat' | translate }}</strong> {{ ticket.seatNumber }}
-    </li>
-  </ul>
+<div class="gg" id="admin-panel-root">
+
+
+  <div class="admin-panel-container">
+  <div class="card nav-card">
+    <button class="btn nav-btn" [class.active]="sectionMode === 'add'" (click)="toggleSection('add')">
+      <span class="material-icons">person_add</span> Add User
+    </button>
+    <button class="btn nav-btn" [class.active]="sectionMode === 'update'" (click)="toggleSection('update')">
+      <span class="material-icons">edit</span> Update User
+    </button>
+    <button class="btn nav-btn danger" [class.active]="sectionMode === 'delete'" (click)="toggleSection('delete')">
+      <span class="material-icons">delete</span> Delete User
+    </button>
+    <button class="btn nav-btn view-btn" [class.active]="sectionMode === 'view'" (click)="toggleSection('view')">
+      <span class="material-icons">list</span> View Users
+    </button>
+  </div>
+  წაშლა ან განახლება თუ გინდა მაშნ მონიშნე view users იდან ჯერ და შემდეგ გამოვა update ან delete 
+
+  <div class="card form-card" *ngIf="sectionMode === 'add'">
+    <form [formGroup]="addUserForm" (ngSubmit)="addUser()" class="form-section">
+      <h2><span class="material-icons">person_add</span> Add User</h2>
+      <div class="form-group">
+        <label>Email</label>
+        <input formControlName="email" type="email" placeholder="Email">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input formControlName="password" type="password" placeholder="Password">
+      </div>
+      <div class="form-group">
+        <label>Role</label>
+        <input formControlName="role" type="text" placeholder="Role">
+      </div>
+      <button type="submit" class="btn primary">Add User</button>
+    </form>
+  </div>
+
+
+
+  <div class="card table-card" *ngIf="sectionMode === 'view'">
+    <h2><span class="material-icons">list</span> Users</h2>
+    <table *ngIf="users.length > 0" class="users-table">
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>ID</th>
+          <th>Email</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>
+            <input type="radio" name="selectedUser" [value]="user.id" (change)="onUserSelect($event)" [checked]="user.id === selectedUserId">
+          </td>
+          <td>{{ user.id }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div class="card form-card" *ngIf="sectionMode === 'update' && selectedUserId">
+    <form [formGroup]="updateForm" (ngSubmit)="onSubmit()" class="form-section">
+      <h2><span class="material-icons">edit</span> Update User</h2>
+      <div class="form-group">
+        <label>Email</label>
+        <input formControlName="email" type="email" placeholder="Email">
+      </div>
+      <div class="form-group">
+        <label>Role</label>
+        <input formControlName="role" type="text" placeholder="Role">
+      </div>
+      <button type="submit" class="btn primary">Update User</button>
+      <button type="button" class="btn" style="margin-left:8px;" (click)="sectionMode = null">Cancel</button>
+    </form>
+  </div>
+
+  <div class="card form-card" *ngIf="sectionMode === 'delete' && selectedUserId">
+    <h2><span class="material-icons">delete</span> Delete User</h2>
+    <p style="color:#e53e3e;font-weight:500;">Are you sure you want to delete this user?</p>
+    <div class="delete-details">
+      <strong>ID:</strong> {{ selectedUser?.id }}<br>
+      <strong>Email:</strong> {{ selectedUser?.email }}<br>
+      <strong>Role:</strong> {{ selectedUser?.role }}
+    </div>
+    <button class="btn danger" (click)="deleteUser(selectedUserId)">Deleteee</button>
+    <button class="btn" style="margin-left:8px;" (click)="sectionMode = null">Cancel</button>
+  </div>
+
+
+  <div class="card" *ngIf="showUpdateUser && selectedUserId === showUpdateUser">
+    <form [formGroup]="updateForm" (ngSubmit)="onSubmit()" class="form-section">
+      <h2>Update User</h2>
+      <div class="form-group">
+        <label>Email</label>
+        <input formControlName="email" type="email" placeholder="Email">
+      </div>
+      <div class="form-group">
+        <label>Role</label>
+        <input formControlName="role" type="text" placeholder="Role">
+      </div>
+      <button type="submit" class="btn primary">Update User</button>
+      <button type="button" class="btn" style="margin-left:8px;" (click)="showUpdateUser = null">Cancel</button>
+    </form>
+  </div>
+
+  <div *ngIf="message" class="message">{{ message }}</div>
+</div>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </div>

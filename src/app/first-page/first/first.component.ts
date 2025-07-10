@@ -5,6 +5,7 @@ import { UserService } from '../../services/user.service';
 import { AdminService } from '../../services/admin.service';
 import { TranslationService } from '../../services/translation.service';
 import { Subscription } from 'rxjs';
+import { GeneralService } from '../../services/general.service';
 
 @Component({
   selector: 'app-first',
@@ -12,6 +13,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./first.component.css']
 })
 export class FirstComponent implements OnInit, OnDestroy {
+  private adminPanelSub?: Subscription;
   @Output() scrollToTrainSearch = new EventEmitter<void>();
 
   backgroundImages = [
@@ -37,12 +39,17 @@ export class FirstComponent implements OnInit, OnDestroy {
     public auth: AuthService,
     private userService: UserService,
     private adminService: AdminService,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private generalService: GeneralService
   ) {
     this.currentLang = this.translationService.getCurrentLang();
     this.translationService.onLangChange().subscribe((lang: string) => {
       this.currentLang = lang;
     });
+  }
+  
+  public toggleAdminPanel(): void {
+    this.generalService.toggleAdminPanel();
   }
 
   ngOnInit(): void {
@@ -53,6 +60,36 @@ export class FirstComponent implements OnInit, OnDestroy {
       this.auth.getUserData().subscribe();
     }
     this.persondata = this.auth?.userData;
+   
+    this.adminPanelSub = this.generalService.adminPanelVisible$.subscribe(visible => {
+      if (visible) {
+        setTimeout(() => {
+          const el = document.getElementById('admin-panel-root');
+          if (el) {
+         
+            const scrollDuration = 900; 
+            const targetY = el.getBoundingClientRect().top + window.pageYOffset;
+            const startY = window.pageYOffset;
+            const distance = targetY - startY;
+            let startTime: number | null = null;
+            function easeInOutQuad(t: number) {
+              return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+            }
+            function animateScroll(currentTime: number) {
+              if (!startTime) startTime = currentTime;
+              const timeElapsed = currentTime - startTime;
+              const progress = Math.min(timeElapsed / scrollDuration, 1);
+              const ease = easeInOutQuad(progress);
+              window.scrollTo(0, startY + distance * ease);
+              if (progress < 1) {
+                requestAnimationFrame(animateScroll);
+              }
+            }
+            requestAnimationFrame(animateScroll);
+          }
+        }, 100);
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -60,9 +97,10 @@ export class FirstComponent implements OnInit, OnDestroy {
       clearInterval(this.intervalId);
     }
     this.userSub?.unsubscribe();
+    this.adminPanelSub?.unsubscribe();
   }
 
-  // --- UI/Navigation Methods ---
+
 
   public logout(): void {
     this.auth.logout();
@@ -84,7 +122,9 @@ export class FirstComponent implements OnInit, OnDestroy {
     setTimeout(() => this.scrollToTrainSearch.emit(), 180);
   }
 
-  // --- Background Image Slider ---
+  
+
+  
 
   startBackgroundRotation(): void {
     this.intervalId = setInterval(() => {
@@ -135,7 +175,7 @@ export class FirstComponent implements OnInit, OnDestroy {
     });
   }
 
-  // --- Auth & Ticket Logic ---
+  
 
   public get isLoggedIn(): boolean {
     if (typeof window === 'undefined' || !window.localStorage) return false;
@@ -151,9 +191,6 @@ export class FirstComponent implements OnInit, OnDestroy {
 
   
 
-  /**
-   * Loads tickets for the current user on init.
-   */
   private loadUserTickets(): void {
     this.userSub = this.auth.getUserData().subscribe({
       next: (user: any) => {
@@ -175,9 +212,9 @@ export class FirstComponent implements OnInit, OnDestroy {
           });
         } else {
           this.isAdmin = false;
-          this.userService.getTicketById(user.id).subscribe({
-            next: (ticket) => {
-              this.tickets = ticket ? [ticket] : [];
+          this.userService.getTicketsByUserId(user.id).subscribe({
+            next: (tickets) => {
+              this.tickets = Array.isArray(tickets) ? tickets : [];
             },
             error: (err) => {
               this.tickets = [];
@@ -192,9 +229,6 @@ export class FirstComponent implements OnInit, OnDestroy {
     });
   }
 
-  /**
-   * Opens the modal and loads tickets for the current user.
-   */
 
   openTicketsModal(): void {
     if (!this.userData) {
@@ -245,7 +279,7 @@ export class FirstComponent implements OnInit, OnDestroy {
     this.ticketsModalOpen = false;
   }
    get userData(): any {
-    // Always check for JWT in localStorage and decode if needed
+  
     const token = typeof window !== 'undefined' ? localStorage.getItem('jwt') : null;
     if (!token) return null;
     try {

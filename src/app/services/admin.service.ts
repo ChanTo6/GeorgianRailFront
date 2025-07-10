@@ -4,6 +4,8 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
+
+
 @Injectable({ providedIn: 'root' })
 export class AdminService {
   private adminApi = 'https://localhost:7145/api/Admin';
@@ -13,6 +15,44 @@ export class AdminService {
   addTrain(data: { trainId: number; name: string; source: string; destination: string; date: string; time: string; totalSeats: number }): Observable<any> {
     const headers = this.getAuthHeaders();
     return this.http.post(`${this.adminApi}/add-train`, data, { headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  addUser(data: { email: string; password: string; role: string }): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.post(`${this.adminApi}/add-user`, data, { headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updateUser(id: number, data: { email?: string; password?: string; role?: string }): Observable<any> {
+
+    console.log(id, data);
+    const headers = this.getAuthHeaders();
+
+    const filteredData: any = {};
+    if (data.email) filteredData.email = data.email;
+    if (data.password) filteredData.password = data.password;
+    if (data.role) filteredData.role = data.role;
+    if (Object.keys(filteredData).length === 0) {
+      return throwError(() => 'No fields to update.');
+    }
+    return this.http.put(`${this.adminApi}/update-user/${id}`, filteredData, { headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteUser(id: number): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.delete(`${this.adminApi}/delete-user/${id}`, { headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getAllUsers(): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.get(`${this.adminApi}/all-users`, { headers }).pipe(
       catchError(this.handleError)
     );
   }

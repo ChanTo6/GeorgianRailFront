@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
+
 @Injectable({ providedIn: 'root' })
 export class UserService {
   private userApi = 'https://localhost:7145/api/User';
@@ -11,14 +12,14 @@ export class UserService {
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
-  // Get current user profile
+ 
   getProfile(): Observable<any> {
     return this.http.get(`${this.userApi}/me`).pipe(
       catchError(this.handleError)
     );
   }
 
-  // Update user profile
+ 
   updateProfile(data: any): Observable<any> {
     return this.http.put(`${this.userApi}/me`, data).pipe(
       catchError(this.handleError)
@@ -26,26 +27,26 @@ export class UserService {
   }
 
 
-  // Get a ticket by its ID
-  getTicketById(ticketId: number): Observable<any> {
-  console.log(`Fetching ticket with ID: ${ticketId}`); // Log before the request
-  return this.http.get(`${this.userApi}/sold-ticket/${ticketId}`).pipe(
-    tap((response:any) => console.log('Ticket fetched:', response)), // Log the response
+  
+ getTicketsByUserId(userId: number): Observable<any[]> {
+  console.log(`Fetching tickets for user ID: ${userId}`);
+  return this.http.get<any[]>(`${this.userApi}/sold-tickets/${userId}`).pipe(
+    tap((response: any) => console.log('Tickets fetched:', response)),
     catchError(this.handleError)
   );
 }
 
 
-  logTicketById(ticketId: number): void {
-    this.getTicketById(ticketId).subscribe({
-      next: (ticket) => {
-        console.log('Received ticket:', ticket);
-      },
-      error: (err) => {
-        console.error('Error fetching ticket:', err);
-      }
-    });
-  }
+logTicketsByUserId(userId: number): void {
+  this.getTicketsByUserId(userId).subscribe({
+    next: (tickets) => {
+      console.log('Received tickets:', tickets);
+    },
+    error: (err) => {
+      console.error('Error fetching tickets:', err);
+    }
+  });
+}
 
 
   private handleError(error: any) {

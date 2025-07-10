@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="register-form-actions">
-      <!-- <button class="register-btn-main" type="submit" [disabled]="!validateForm()">Register</button> -->
+      
       <button class="register-btn-main" type="button" (click)="sendPin()" [disabled]="pinSent || !validateForm()">{{ 'pin.send' | translate }}</button>
       <button class="register-btn-main" type="button" (click)="togglePinInput()" *ngIf="pinSent && !showPinInput">{{ 'pin.enter' | translate }}</button>
     </div>

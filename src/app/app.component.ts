@@ -1,5 +1,7 @@
 import { Component, ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
 import { TranslationService } from './services/translation.service';
+import { GeneralService } from './services/general.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -7,20 +9,32 @@ import { TranslationService } from './services/translation.service';
   styleUrls: ['./app.component.css']
 })
 
+
 export class AppComponent implements OnInit, OnDestroy {
   title = 'my-app';
   private langSub: any;
+  adminPanelVisible = false;
+  private adminPanelSub?: Subscription;
 
-  constructor(public translationService: TranslationService, private cdr: ChangeDetectorRef) {}
+  constructor(
+    public translationService: TranslationService,
+    private cdr: ChangeDetectorRef,
+    private generalService: GeneralService
+  ) {}
 
   ngOnInit() {
     this.langSub = this.translationService.onLangChange().subscribe(() => {
+      this.cdr.detectChanges();
+    });
+    this.adminPanelSub = this.generalService.adminPanelVisible$.subscribe(visible => {
+      this.adminPanelVisible = visible;
       this.cdr.detectChanges();
     });
   }
 
   ngOnDestroy() {
     if (this.langSub) this.langSub.unsubscribe();
+    if (this.adminPanelSub) this.adminPanelSub.unsubscribe();
   }
 
   get isAdmin(): boolean {
@@ -36,14 +50,14 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   scrollToTrainSearchSection() {
-    // Try to scroll immediately, and if not found, retry a few times (handles async rendering)
+  
     let attempts = 0;
     const maxAttempts = 10;
-    const scrollDuration = 900; // ms
+    const scrollDuration = 900; 
     const tryScroll = () => {
       const el = document.getElementById('train-search-section');
       if (el) {
-        // Custom smooth scroll for slower effect
+       
         const targetY = el.getBoundingClientRect().top + window.pageYOffset;
         const startY = window.pageYOffset;
         const distance = targetY - startY;

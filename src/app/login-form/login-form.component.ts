@@ -36,12 +36,12 @@ export class LoginFormComponent {
           if (res && res.token) {
             localStorage.setItem('jwt', res.token);
             this.success = 'Login successful!';
-            // Fetch user data after successful login and set it globally
+           
             this.auth.getUserData().subscribe({
               next: (userData) => {
                 this.auth.userData = userData;
                 console.log('User data:', userData);
-                // Navigate to FirstComponent (home page)
+              
                 this.router.navigate(['/']);
               },
               error: (err) => {
