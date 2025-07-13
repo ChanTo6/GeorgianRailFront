@@ -8,6 +8,21 @@ import { AuthService } from './auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class AdminService {
+  // --- Admin Registration: Send PIN to Email ---
+  sendRegistrationPin(email: string): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.post(`${this.adminApi}/send-registration-pin`, { email }, { headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // --- Admin Registration: Verify PIN ---
+  verifyRegistrationPin(email: string, pin: string): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.post(`${this.adminApi}/verify-registration-pin`, { email, pin }, { headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
   private adminApi = 'https://localhost:7145/api/Admin';
 
   constructor(private http: HttpClient, private auth: AuthService) {}

@@ -1,3 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.register-form-white {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10), 0 1.5px 4px rgba(0,0,0,0.08);
+  padding: 2.5rem 2rem 2rem 2rem;
+  max-width: 480px;
+  margin: 2rem auto;
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+.register-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.register-fields-row {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.register-field-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.register-label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #4a5568;
+  margin-bottom: 0.5rem;
+}
+
+.register-form-white input[type="email"],
+.register-form-white input[type="password"],
+.register-form-white input[type="text"] {
+  padding: 0.7rem 1rem;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #f9fafb;
+  color: #2d3748;
+  transition: border 0.2s;
+  outline: none;
+}
+
+.register-form-white input:focus {
+  border-color: #3182ce;
+  background: #fff;
+}
+
+.register-form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  justify-content: center;
+}
+
+.register-btn-main {
+  background: linear-gradient(90deg, #3182ce 0%, #63b3ed 100%);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(49,130,206,0.08);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.register-btn-main:disabled {
+  background: #cbd5e1;
+  color: #a0aec0;
+  cursor: not-allowed;
+}
+
+.register-btn-main:hover:not(:disabled) {
+  background: linear-gradient(90deg, #2563eb 0%, #4299e1 100%);
+  box-shadow: 0 4px 16px rgba(49,130,206,0.12);
+}
+
+.register-pin-section {
+  margin: 1.2rem 0 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register-pin-section label {
+  font-size: 1rem;
+  color: #4a5568;
+  margin-bottom: 0.5rem;
+}
+
+.register-pin-section input {
+  width: 160px;
+  text-align: center;
+  font-size: 1.2rem;
+  letter-spacing: 0.2em;
+  margin-bottom: 0.7rem;
+}
+
+.register-messages {
+  margin: 1rem 0 0.5rem 0;
+  text-align: center;
+}
+
+.register-error {
+  color: #e53e3e;
+  font-size: 0.98rem;
+  margin-top: 0.3rem;
+  font-weight: 500;
+}
+
+.register-success {
+  color: #38a169;
+  font-size: 1rem;
+  margin-top: 0.3rem;
+  font-weight: 500;
+}
+
+.register-links-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.register-link-btn {
+  background: none;
+  border: none;
+  color: #3182ce;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.register-link-btn:hover {
+  color: #2563eb;
+}
+
+@media (max-width: 600px) {
+  .register-form-white {
+    padding: 1.2rem 0.5rem;
+    max-width: 98vw;
+  }
+  .register-fields-row {
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+}
 form {
   display: flex;
   flex-direction: column;

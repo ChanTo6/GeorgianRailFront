@@ -19,22 +19,41 @@
   წაშლა ან განახლება თუ გინდა მაშნ მონიშნე view users იდან ჯერ და შემდეგ გამოვა update ან delete 
 
   <div class="card form-card" *ngIf="sectionMode === 'add'">
-    <form [formGroup]="addUserForm" (ngSubmit)="addUser()" class="form-section">
-      <h2><span class="material-icons">person_add</span> Add User</h2>
-      <div class="form-group">
-        <label>Email</label>
-        <input formControlName="email" type="email" placeholder="Email">
+ <form class="register-form-white" (ngSubmit)="register()">
+    <h2 class="register-title">{{ 'register.createAccount' | translate }}</h2>
+    <div class="register-fields-row">
+      <div class="register-field-col">
+        <label class="register-label" for="register-email">{{ 'email.label' | translate }}</label>
+        <input id="register-email" type="email" [(ngModel)]="email" name="email" [placeholder]="'email.label' | translate" required (blur)="validateForm()" />
+        <div class="register-error" *ngIf="emailError">{{ emailError }}</div>
       </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input formControlName="password" type="password" placeholder="Password">
+      <div class="register-field-col">
+        <label class="register-label" for="register-password">{{ 'password.label' | translate }}</label>
+        <input id="register-password" type="password" [(ngModel)]="password" name="password" [placeholder]="'password.label' | translate" required (blur)="validateForm()" />
+        <div class="register-error" *ngIf="passwordError">{{ passwordError }}</div>
       </div>
-      <div class="form-group">
-        <label>Role</label>
-        <input formControlName="role" type="text" placeholder="Role">
-      </div>
-      <button type="submit" class="btn primary">Add User</button>
-    </form>
+    </div>
+    <div class="register-form-actions">
+      
+      <button class="register-btn-main" type="button" (click)="sendPin()" [disabled]="pinSent || !validateForm()">{{ 'pin.send' | translate }}</button>
+      <button class="register-btn-main" type="button" (click)="togglePinInput()" *ngIf="pinSent && !showPinInput">{{ 'pin.enter' | translate }}</button>
+    </div>
+    <div *ngIf="showPinInput" class="register-pin-section">
+      <label for="register-pin">{{ 'pin.enter' | translate }}</label>
+      <input id="register-pin" type="text" [(ngModel)]="pin" name="pin" maxlength="6" [placeholder]="'pin.label' | translate" required (blur)="validatePinInput()" />
+      <button class="register-btn-main" type="button" (click)="verifyPin()" [disabled]="!validatePinInput()">{{ 'register' | translate }}</button>
+      <div class="register-error" *ngIf="pinError">{{ pinError }}</div>
+      <div class="register-success" *ngIf="pinSuccess">{{ pinSuccess }}</div>
+    </div>
+    <div class="register-messages">
+      <div class="register-error" *ngIf="error">{{ error }}</div>
+      <div class="register-success" *ngIf="success">{{ success }}</div>
+    </div>
+    <div class="register-links-row">
+      <button type="button" class="register-link-btn" (click)="goToLogin()">{{ 'login.haveAccount' | translate }}</button>
+      <button type="button" class="register-link-btn" (click)="goToHome()">{{ 'home.back' | translate }}</button>
+    </div>
+  </form>
   </div>
 
 
