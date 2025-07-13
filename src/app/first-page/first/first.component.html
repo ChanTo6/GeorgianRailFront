@@ -157,6 +157,12 @@
           <span class="menu-icon" aria-hidden="true"><svg width="1.3em" height="1.3em" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;"><circle cx="12" cy="8" r="4" stroke="#1976d2" stroke-width="2"/><path d="M4 20c0-3.3137 3.134-6 7-6s7 2.6863 7 6" stroke="#1976d2" stroke-width="2"/></svg></span>
           <span *ngIf="userData">{{ userData.email || userData.username || ('user' | translate) }}</span>
         </div>
+        <button *ngIf="userData && !isAdmin" class="menu-btn-elegant" (click)="openProfileModal()">
+          <span class="menu-icon" aria-hidden="true">👤</span>
+          {{ 'user.profile' | translate }}
+        </button>
+<!-- User Profile Modal -->
+
         <button class="menu-btn-elegant" (click)="scrollToTrainSearch.emit()">
           <span class="menu-icon" aria-hidden="true"><svg width="1.3em" height="1.3em" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;"><rect x="3" y="7" width="18" height="13" rx="2" stroke="#1976d2" stroke-width="2"/><path d="M16 3v4M8 3v4" stroke="#1976d2" stroke-width="2"/><path d="M3 11h18" stroke="#1976d2" stroke-width="2"/></svg></span>
           {{ 'my.booked.tickets' | translate }}
@@ -175,4 +181,30 @@
       </ng-template>
     </div>
   </div>
+  <div class="ticket-modal-backdrop" *ngIf="showProfileModal" (click)="closeProfileModal()">
+  <div class="ticket-modal profile-modal" (click)="$event.stopPropagation()">
+    <button class="close-modal-btn" (click)="closeProfileModal()">&times;</button>
+    <h2>{{ 'user.profile' | translate }}</h2>
+    <form *ngIf="profileData" (ngSubmit)="submitProfileUpdate()" class="profile-form">
+      <div class="form-group">
+        <label>Email</label>
+        <input [(ngModel)]="profileData.email" name="email" type="email" required />
+      </div>
+      <div class="form-group">
+        <label>New Password</label>
+        <input [(ngModel)]="profileData.password" name="password" type="password" placeholder="(leave blank to keep)" />
+      </div>
+      <button class="btn primary" type="submit">{{ 'update.profile' | translate }}</button>
+    </form>
+    <div *ngIf="profileMessage" class="message">{{ profileMessage }}</div>
+  </div>
+</div>
+<div *ngIf="showAdminPanelModal" class="ticket-modal-backdrop" (click)="closeAdminPanelModal()">
+  <div class="ticket-modal admin-panel-modal" (click)="$event.stopPropagation()">
+    <button class="close-modal-btn" (click)="closeAdminPanelModal()">&times;</button>
+    <div class="admin-panelDiv">
+      <admin-panel></admin-panel>
+    </div>
+  </div>
+</div>
 </div>

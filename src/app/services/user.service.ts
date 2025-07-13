@@ -13,21 +13,35 @@ export class UserService {
   constructor(private http: HttpClient, private auth: AuthService) {}
 
  
-  getProfile(): Observable<any> {
-    return this.http.get(`${this.userApi}/me`).pipe(
-      catchError(this.handleError)
+    getProfile(): Observable<any> {
+    const token = localStorage.getItem('jwt');
+    if (!token) {
+      return throwError(() => new Error('No token found'));
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get(`${this.userApi}/profile`, { headers }).pipe(
+      catchError((error) => {
+        console.error('Profile fetch failed:', error);
+        return throwError(() => error);
+      })
     );
   }
 
- 
   updateProfile(data: any): Observable<any> {
-    return this.http.put(`${this.userApi}/me`, data).pipe(
+    const token = localStorage.getItem('jwt');
+    if (!token) return throwError(() => new Error('No token found'));
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.put(`${this.userApi}/update`, data, { headers }).pipe(
       catchError(this.handleError)
     );
   }
 
-
-  
  getTicketsByUserId(userId: number): Observable<any[]> {
   console.log(`Fetching tickets for user ID: ${userId}`);
   return this.http.get<any[]>(`${this.userApi}/sold-tickets/${userId}`).pipe(

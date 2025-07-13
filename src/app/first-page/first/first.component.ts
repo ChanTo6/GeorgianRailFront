@@ -13,6 +13,48 @@ import { GeneralService } from '../../services/general.service';
   styleUrls: ['./first.component.css']
 })
 export class FirstComponent implements OnInit, OnDestroy {
+  showProfileModal = false;
+   profileData: any = {};
+  profileMessage: string = '';
+
+  showAdminPanelModal = false;
+
+  openProfileModal(): void {
+    this.showProfileModal=true;
+    this.profileMessage = '';
+    this.userService.getProfile().subscribe({
+      next: (data) => {
+        this.profileData = { ...data, password: '' }; 
+        this.showProfileModal = true;
+      },
+      error: () => {
+        this.profileMessage = 'Failed to load profile.';
+      }
+    });
+  }
+
+  closeProfileModal(): void {
+    this.showProfileModal = false;
+    this.profileData = null;
+    this.profileMessage = '';
+  }
+
+  submitProfileUpdate(): void {
+    const updateData: any = { ...this.profileData };
+    if (!updateData.password) delete updateData.password;
+    this.userService.updateProfile(updateData).subscribe({
+      next: () => {
+        this.profileMessage = 'Profile updated successfully!';
+        setTimeout(() => this.closeProfileModal(), 1200);
+      },
+      error: (err) => {
+        this.profileMessage = 'Failed to update profile.';
+      }
+    });
+  }
+  userOnlyAction(): void {
+    alert('User-only action triggered!');
+  }
   private adminPanelSub?: Subscription;
   @Output() scrollToTrainSearch = new EventEmitter<void>();
 
@@ -49,7 +91,12 @@ export class FirstComponent implements OnInit, OnDestroy {
   }
   
   public toggleAdminPanel(): void {
-    this.generalService.toggleAdminPanel();
+    this.menuOpen = false;
+    this.showAdminPanelModal = true;
+  }
+
+  closeAdminPanelModal(): void {
+    this.showAdminPanelModal = false;
   }
 
   ngOnInit(): void {

@@ -99,14 +99,14 @@ button:hover {
   .form-card {
     box-shadow: 0 2px 12px rgba(49,130,206,0.08);
     border-radius: 14px;
-    background: #f9fafb;
+    background: black;
     max-width: 480px;
     margin: 0 auto 16px auto;
   }
   .table-card {
     box-shadow: 0 2px 12px rgba(49,130,206,0.08);
     border-radius: 14px;
-    background: #fff;
+    background: black;
     max-width: 700px;
     margin: 0 auto 16px auto;
   }
@@ -232,7 +232,7 @@ button:hover {
   .message {
     margin-top: 24px;
     padding: 12px 20px;
-    background: #e6fffa;
+    background: red;
     color: #234e52;
     border-radius: 8px;
     font-size: 1.1rem;
