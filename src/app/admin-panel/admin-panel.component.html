@@ -40,7 +40,7 @@
     </div>
     <div *ngIf="showPinInput" class="register-pin-section">
       <label for="register-pin">{{ 'pin.enter' | translate }}</label>
-      <input id="register-pin" type="text" [(ngModel)]="pin" name="pin" maxlength="6" [placeholder]="'pin.label' | translate" required (blur)="validatePinInput()" />
+      <input id="register-pin" type="text" [(ngModel)]="pin" name="pin" maxlength="6"required (blur)="validatePinInput()" />
       <button class="register-btn-main" type="button" (click)="verifyPin()" [disabled]="!validatePinInput()">{{ 'register' | translate }}</button>
       <div class="register-error" *ngIf="pinError">{{ pinError }}</div>
       <div class="register-success" *ngIf="pinSuccess">{{ pinSuccess }}</div>
@@ -49,10 +49,7 @@
       <div class="register-error" *ngIf="error">{{ error }}</div>
       <div class="register-success" *ngIf="success">{{ success }}</div>
     </div>
-    <div class="register-links-row">
-      <button type="button" class="register-link-btn" (click)="goToLogin()">{{ 'login.haveAccount' | translate }}</button>
-      <button type="button" class="register-link-btn" (click)="goToHome()">{{ 'home.back' | translate }}</button>
-    </div>
+
   </form>
   </div>
 

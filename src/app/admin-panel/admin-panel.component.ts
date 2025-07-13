@@ -18,7 +18,18 @@ import { CustomAuthValidators } from '../validators/custom-auth.validators';
 export class AdminPanelComponent implements OnInit {
 
   addUserForm: FormGroup;
+   showAddUser = false;
+  showUpdateUser: number | null = null;
+  updateForm: FormGroup;
 
+  message: string = '';
+  users: any[] = [];
+  selectedUserId: number | null = null;
+  pinSent = false;
+  pin = '';
+  showPinInput = false;
+  emailError = '';
+  passwordError = '';
   sectionMode: 'add' | 'update' | 'delete' | 'view' | null = null;
   selectedUser: any = null;
   pinError!: any;
@@ -29,19 +40,10 @@ export class AdminPanelComponent implements OnInit {
   password!: string;
   
 
-  toggleSection(section: 'add' | 'update' | 'delete' | 'view') {
-    this.sectionMode = this.sectionMode === section ? null : section;
+ ngOnInit() {
+    this.fetchUsers();
   }
-
-  showAddUser = false;
-  showUpdateUser: number | null = null;
-  updateForm: FormGroup;
-
-  message: string = '';
-  users: any[] = [];
-  selectedUserId: number | null = null;
-
-  constructor(private fb: FormBuilder, private adminService: AdminService, private auth: AuthService, private router: Router) {
+   constructor(private fb: FormBuilder, private adminService: AdminService, private auth: AuthService, private router: Router) {
     this.updateForm = this.fb.group({
       email: [''],   
       role: ['']
@@ -52,13 +54,14 @@ export class AdminPanelComponent implements OnInit {
       role: ['User']
     });
   }
-  // --- Two-step Admin Registration ---
-  pinSent = false;
-  pin = '';
-  showPinInput = false;
 
-  emailError = '';
-  passwordError = '';
+ 
+
+  toggleSection(section: 'add' | 'update' | 'delete' | 'view') {
+    this.sectionMode = this.sectionMode === section ? null : section;
+  }
+
+ 
 
   validateForm(): boolean {
     this.emailError = CustomAuthValidators.validateEmail(this.email) || '';
@@ -144,7 +147,7 @@ export class AdminPanelComponent implements OnInit {
  verifyPin() {
   this.pinError = '';
   this.pinSuccess = '';
-
+  this.fetchUsers();
   if (!this.validatePinInput()) {
     return;
   }
@@ -179,9 +182,7 @@ export class AdminPanelComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.fetchUsers();
-  }
+ 
 
   fetchUsers() {
   this.adminService.getAllUsers().subscribe({

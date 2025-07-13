@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../services/auth.service";
 import { TrainService } from "../services/train.service";
 
@@ -8,7 +8,7 @@ import { TrainService } from "../services/train.service";
   templateUrl: './train-search.component.html',
   styleUrls: ['./train-search.component.css']
 })
-export class TrainSearchComponent {
+export class TrainSearchComponent implements OnInit {
   source = '';
   destination = '';
   trains: any[] = [];
@@ -17,6 +17,9 @@ export class TrainSearchComponent {
   seatInputs: { [trainId: number]: number } = {};
 
   constructor(private trainService: TrainService, private authService: AuthService) {}
+  ngOnInit(): void {
+    this.alltrain();
+  }
 
   searchTrains(): void {
     this.error = '';
@@ -53,6 +56,17 @@ export class TrainSearchComponent {
     this.trainService.buyTickets(data).subscribe({
       next: () => {
         this.buyMessage = 'Ticket purchased successfully!';
+      },
+      error: (err: any) => this.error = err
+    });
+  }
+
+  alltrain(){
+    this.trainService.getAllTrains().subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.trains = res;
+        this.error = '';
       },
       error: (err: any) => this.error = err
     });
